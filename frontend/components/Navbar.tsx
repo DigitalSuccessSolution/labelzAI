@@ -68,10 +68,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close mobile menu and scroll to top on route change
   useEffect(() => {
     setIsOpen(false);
     setActiveDropdown(null);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [pathname]);
 
   const toggleDropdown = (name: string) => {
@@ -144,14 +145,31 @@ export default function Navbar() {
                     <div className={`grid gap-2 ${item.name === "Industries" ? "grid-cols-2" : "grid-cols-1"}`}>
                       {item.children?.map((child) => {
                         const Icon = dropdownIconMap[child.name] || Settings;
+                        const isChildActive = pathname === child.href;
                         return (
                           <Link
                             key={child.name}
                             href={child.href}
-                            className="flex items-center space-x-2.5 p-2 pl-2 border-l-2 border-transparent hover:border-accent-gold hover:bg-accent-gold/5 hover:pl-3.5 rounded-r-xl transition-all duration-300 group/child"
+                            className={`flex items-center space-x-2.5 p-2 rounded-r-xl transition-all duration-300 group/child ${
+                              isChildActive
+                                ? "border-l-2 border-accent-gold bg-accent-gold/5 pl-3.5"
+                                : "border-l-2 border-transparent hover:border-accent-gold hover:bg-accent-gold/5 hover:pl-3.5"
+                            }`}
                           >
-                            <Icon className="h-4 w-4 text-navy/40 group-hover/child:text-accent-gold group-hover/child:scale-110 group-hover/child:rotate-[15deg] transition-all duration-300 shrink-0" />
-                            <span className="text-sm font-semibold text-navy group-hover/child:text-accent-gold transition-colors duration-300">
+                            <Icon
+                              className={`h-4 w-4 shrink-0 transition-all duration-300 ${
+                                isChildActive
+                                  ? "text-accent-gold scale-110 rotate-[15deg]"
+                                  : "text-navy/40 group-hover/child:text-accent-gold group-hover/child:scale-110 group-hover/child:rotate-[15deg]"
+                              }`}
+                            />
+                            <span
+                              className={`text-sm font-semibold transition-colors duration-300 ${
+                                isChildActive
+                                  ? "text-accent-gold"
+                                  : "text-navy group-hover/child:text-accent-gold"
+                              }`}
+                            >
                               {child.name}
                             </span>
                           </Link>
@@ -232,13 +250,24 @@ export default function Navbar() {
                   >
                     {item.children?.map((child) => {
                       const Icon = dropdownIconMap[child.name] || Settings;
+                      const isChildActive = pathname === child.href;
                       return (
                         <Link
                           key={child.name}
                           href={child.href}
-                          className="flex items-center space-x-2.5 px-4 py-2 border-l border-transparent hover:border-accent-gold rounded-r-lg text-xs font-medium text-navy-gray hover:text-accent-gold hover:bg-accent-gold/5 transition-all duration-300 group/child"
+                          className={`flex items-center space-x-2.5 px-4 py-2 border-l rounded-r-lg text-xs font-medium transition-all duration-300 group/child ${
+                            isChildActive
+                              ? "border-accent-gold text-accent-gold bg-accent-gold/5"
+                              : "border-transparent text-navy-gray hover:border-accent-gold hover:text-accent-gold hover:bg-accent-gold/5"
+                          }`}
                         >
-                          <Icon className="h-3.5 w-3.5 text-navy/40 group-hover/child:text-accent-gold transition-colors duration-300 shrink-0" />
+                          <Icon
+                            className={`h-3.5 w-3.5 shrink-0 transition-colors duration-300 ${
+                              isChildActive
+                                ? "text-accent-gold"
+                                : "text-navy/40 group-hover/child:text-accent-gold"
+                            }`}
+                          />
                           <span>{child.name}</span>
                         </Link>
                       );

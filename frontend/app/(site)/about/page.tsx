@@ -2,33 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  ChevronRight,
-  Monitor,
-  HeartPulse,
-  Pill,
-  Landmark,
-  Factory,
-  Wine,
-  ShoppingCart,
   Users,
   ClipboardCheck,
   ShieldCheck,
   RefreshCcw,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
-
-const industries = [
-  { name: "Information Technology", icon: Monitor },
-  { name: "Medical & Healthcare", icon: HeartPulse },
-  { name: "Pharmaceuticals", icon: Pill },
-  { name: "BFSI", icon: Landmark },
-  { name: "Manufacturing", icon: Factory },
-  { name: "Liquor & Beverages", icon: Wine },
-  { name: "FMCG", icon: ShoppingCart },
-];
 
 const hrServicesList = [
   {
@@ -78,7 +59,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content Column */}
             <div className="space-y-6">
-              <Badge variant="secondary">Our Core Strategy</Badge>
               <h2 className="text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
                 Where Intelligence Meets{" "}
                 <span className="text-accent-gold font-semibold">Recruitment Excellence</span>
@@ -113,40 +93,15 @@ export default function AboutPage() {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <Badge variant="secondary">Our Portfolio</Badge>
             <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight">
               Industries We Serve
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto text-center mb-14">
+          <div className="max-w-4xl mx-auto text-center">
             <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
-              We serve a diverse industry portfolio spanning Information Technology, Medical & Healthcare, Pharmaceuticals, BFSI, Manufacturing, Liquor & Beverages, FMCG, etc. — delivering end-to-end hiring solutions from executive search and lateral hiring to bulk recruitment and contract staffing.
+              We serve a diverse industry portfolio spanning Information Technology, Medical &amp; Healthcare, Pharmaceuticals, BFSI, Manufacturing, Liquor &amp; Beverages, FMCG, etc. — delivering end-to-end hiring solutions from executive search and lateral hiring to bulk recruitment and contract staffing.
             </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 max-w-4xl mx-auto">
-            {industries.map((ind) => {
-              const Icon = ind.icon;
-              return (
-                <div
-                  key={ind.name}
-                  className="group flex flex-col items-center text-center p-6 rounded-2xl border border-off-white-dark hover:border-accent-gold/30 hover:shadow-xl bg-white transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 bg-accent-gold/5 group-hover:scale-110 group-hover:bg-accent-gold/10">
-                    <Icon className="h-6 w-6 text-accent-gold" />
-                  </div>
-                  <p className="text-sm font-semibold text-navy font-inter leading-snug">
-                    {ind.name}
-                  </p>
-                </div>
-              );
-            })}
-
-            <div className="group flex flex-col items-center justify-center text-center p-6 rounded-2xl border border-dashed border-navy/20 hover:border-accent-gold bg-white transition-all duration-300">
-              <span className="text-2xl font-bold font-poppins text-navy mb-1 leading-none">…</span>
-              <p className="text-sm font-semibold text-navy-gray font-inter">And Many More</p>
-            </div>
           </div>
         </div>
       </section>
@@ -156,12 +111,14 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="space-y-6">
-              <Badge variant="secondary">Corporate Support</Badge>
               <h2 className="text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
                 Strategic Lifecycle Support
               </h2>
               <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
                 Our HR management services encompass workforce planning, onboarding optimization, compliance management, and employee lifecycle support — engineered to reduce operational overhead and improve retention rates.
+              </p>
+              <p className="text-base text-navy-gray leading-relaxed font-inter pt-4 border-t border-navy/5">
+                At LabelzAI, we don&apos;t just fill positions — we build scalable talent pipelines aligned to your long-term growth strategy. With deep domain expertise, a verified candidate network, and a structured delivery process, we ensure faster time-to-hire, lower attrition, and stronger team performance.
               </p>
             </div>
 
@@ -171,17 +128,19 @@ export default function AboutPage() {
                 return (
                   <div
                     key={srv.title}
-                    className="group bg-white border border-off-white-dark rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 hover:border-accent-gold/20 transition-all duration-300"
+                    className="group bg-white border border-[#e2e8f0]/80 rounded-2xl p-6 hover:shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:border-accent-gold/25 transition-all duration-300 flex flex-col justify-between h-full"
                   >
-                    <div className="w-11 h-11 bg-accent-gold/5 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-accent-gold/10 transition-all duration-300">
-                      <Icon className="h-5 w-5 text-accent-gold" />
+                    <div>
+                      <div className="text-accent-gold mb-4">
+                        <Icon className="h-7 w-7 transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-6" />
+                      </div>
+                      <h3 className="text-base font-bold font-poppins text-navy mb-1.5 group-hover:text-accent-gold transition-colors duration-300">
+                        {srv.title}
+                      </h3>
+                      <p className="text-xs md:text-sm text-navy-gray leading-relaxed font-inter font-normal">
+                        {srv.description}
+                      </p>
                     </div>
-                    <h3 className="text-base font-semibold font-poppins text-navy mb-1.5">
-                      {srv.title}
-                    </h3>
-                    <p className="text-xs text-navy-gray leading-relaxed font-inter">
-                      {srv.description}
-                    </p>
                   </div>
                 );
               })}
@@ -193,28 +152,34 @@ export default function AboutPage() {
       {/* 5. Closing Paragraph as Card CTA-Style Banner */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto relative">
-            <div className="relative bg-white border border-off-white-dark rounded-3xl p-10 md:p-16 shadow-lg hover:shadow-xl transition-all duration-500 text-center space-y-8">
-              <div className="mx-auto w-14 h-14 bg-accent-gold/5 rounded-2xl flex items-center justify-center">
-                <Sparkles className="h-7 w-7 text-accent-gold" />
-              </div>
+          <div className="max-w-5xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark group">
+            {/* Background Image with Navy Overlay */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/images/cta-bg.png"
+                alt="LabelzAI Corporate background"
+                fill
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-navy/60 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent opacity-80" />
+            </div>
 
-              <p className="text-base md:text-lg text-navy-gray leading-relaxed max-w-3xl mx-auto font-inter">
-                At LabelzAI, we don&apos;t just fill positions — we build scalable talent pipelines aligned to your long-term growth strategy. With deep domain expertise, a verified candidate network, and a structured delivery process, we ensure faster time-to-hire, lower attrition, and stronger team performance.
-              </p>
-
-              <p className="text-2xl sm:text-3xl md:text-4xl font-normal font-poppins text-navy leading-snug tracking-tight max-w-3xl mx-auto">
+            {/* Content */}
+            <div className="relative z-10 p-8 md:p-14 text-center space-y-6">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-normal font-poppins text-white leading-snug tracking-tight max-w-4xl mx-auto">
                 Partner with LabelzAI — where{" "}
-                <span className="text-accent-gold font-semibold">intelligent recruitment</span> meets{" "}
-                <span className="text-accent-gold font-semibold">operational excellence.</span>
+                <span className="text-[#7ABEF4] font-semibold">intelligent recruitment</span> meets{" "}
+                <span className="text-[#7ABEF4] font-semibold">operational excellence.</span>
               </p>
 
               <div className="pt-4">
-                <Link href="/contact">
-                  <Button variant="primary" size="lg" className="group text-base">
-                    Contact Us
-                    <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer"
+                >
+                  Contact Us
+                  <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>

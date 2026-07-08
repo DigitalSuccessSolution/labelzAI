@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   BrainCircuit,
   Map,
@@ -90,21 +91,20 @@ export default function WhyChooseUsPage() {
               return (
                 <div
                   key={adv.title}
-                  className="group bg-white border border-off-white-dark rounded-2xl p-8 hover:shadow-xl hover:border-accent-gold/30 transition-all duration-300 flex flex-col justify-between"
+                  className="group bg-white border border-[#e2e8f0]/80 rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:border-accent-gold/35 transition-all duration-500 flex flex-col justify-between h-full"
                 >
-                  <div>
-                    <div className="w-12 h-12 bg-accent-gold/5 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-accent-gold/10 transition-transform duration-300">
-                      <Icon className="h-6 w-6 text-accent-gold" />
+                  <div className="space-y-5">
+                    <div className="text-accent-gold shrink-0">
+                      <Icon className="h-8 w-8 transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-6" />
                     </div>
-                    <h3 className="text-lg font-semibold font-poppins text-navy mb-3 group-hover:text-accent-gold transition-colors duration-300">
-                      {adv.title}
-                    </h3>
-                    <p className="text-xs text-navy-gray leading-relaxed font-inter">
-                      {adv.description}
-                    </p>
-                  </div>
-                  <div className="mt-6 pt-4 border-t border-off-white-dark flex items-center text-xs font-semibold text-accent-gold uppercase tracking-wider">
-                    <span>Delivered with Precision</span>
+                    <div className="space-y-3">
+                      <h3 className="text-lg md:text-xl font-bold font-poppins text-navy group-hover:text-accent-gold transition-colors duration-300">
+                        {adv.title}
+                      </h3>
+                      <p className="text-sm text-navy-gray leading-relaxed font-inter font-normal">
+                        {adv.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               );
@@ -118,26 +118,36 @@ export default function WhyChooseUsPage() {
       {/* 4. Closing CTA Section */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto relative">
-            <div className="relative bg-white border border-off-white-dark rounded-3xl p-10 md:p-16 shadow-lg hover:shadow-xl transition-all duration-500 text-center space-y-8">
-              <div className="mx-auto w-14 h-14 bg-accent-gold/5 rounded-2xl flex items-center justify-center">
-                <Sparkles className="h-7 w-7 text-accent-gold" />
-              </div>
+          <div className="max-w-5xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark group">
+            {/* Background Image with Navy Overlay */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/images/cta-bg.png"
+                alt="LabelzAI Corporate background"
+                fill
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-navy/60 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent opacity-80" />
+            </div>
 
-              <p className="text-2xl sm:text-3xl md:text-4xl font-normal font-poppins text-navy leading-snug tracking-tight max-w-3xl mx-auto">
+            {/* Content */}
+            <div className="relative z-10 p-8 md:p-14 text-center space-y-6">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-normal font-poppins text-white leading-snug tracking-tight max-w-3xl mx-auto">
                 Ready to Accelerate Your Growth?
               </p>
 
-              <p className="text-base md:text-lg text-navy-gray max-w-2xl mx-auto leading-relaxed font-inter">
+              <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed font-inter">
                 Partner with a recruitment specialist that delivers speed, precision, and alignment across all organization levels nationwide.
               </p>
 
               <div className="pt-4">
-                <Link href="/contact">
-                  <Button variant="primary" size="lg" className="group text-base">
-                    Connect With Us
-                    <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer"
+                >
+                  Connect With Us
+                  <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>

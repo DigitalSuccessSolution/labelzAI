@@ -546,13 +546,12 @@ export const INDUSTRY_DETAILS: Record<string, IndustryDetails> = {
 export const COMPANY_INFO = {
   name: "LabelzAI Techservices LLP",
   tagline: "Empowering Businesses with Intelligence-Driven Recruitment Solutions",
-  address: "Level 4, Dynasty Business Park, Andheri-Kurla Road, Andheri East, Mumbai, Maharashtra 400059",
+  address: "Baghbahara Road, Kutchhari Chowk, Opp. Hanuman Mandir, Mahasamund, Chhattisgarh – 493445",
   phone: "+91 22 6845 9000",
-  email: "info@labelzai.com",
+  email: "info@labelzai.in",
   socials: {
     linkedin: "https://linkedin.com/company/labelzai",
-    twitter: "https://twitter.com/labelzai",
-    facebook: "https://facebook.com/labelzai",
+    instagram: "https://instagram.com/labelzai",
   },
 };
 

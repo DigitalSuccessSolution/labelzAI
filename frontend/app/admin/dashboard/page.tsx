@@ -251,12 +251,7 @@ export default function AdminDashboardPage() {
     <div className="flex-1 bg-off-white min-h-[85vh] py-12">
       <div className="container mx-auto px-4 md:px-6">
         
-        {/* Navigation Breadcrumb */}
-        <div className="flex items-center space-x-2 text-xs text-navy-gray mb-6">
-          <Link href="/" className="hover:text-navy transition-colors">Home</Link>
-          <ChevronRight className="h-3 w-3" />
-          <span className="text-navy font-semibold">Admin Dashboard</span>
-        </div>
+
 
         {/* Dashboard Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">

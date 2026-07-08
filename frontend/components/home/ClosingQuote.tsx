@@ -37,11 +37,12 @@ export default function ClosingQuote() {
 
             {/* CTA Button */}
             <div>
-              <Link href="/contact" className="inline-block">
-                <button className="group inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
-                  Partner With LabelzAI
-                  <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer"
+              >
+                Partner With LabelzAI
+                <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
