@@ -32,11 +32,12 @@ export default function IntroSection() {
               We specialize in delivering end-to-end talent acquisition solutions — from entry-level hiring and lateral placements to executive search and large-scale volume recruitment — across diverse sectors including Information Technology, Healthcare, Pharmaceuticals, BFSI, Manufacturing, FMCG, and beyond.
             </p>
             <div className="pt-2">
-              <Link href="/about">
-                <Button variant="accent-teal" size="md" className="group">
-                  Learn More About Us
-                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+              <Link
+                href="/about"
+                className="group inline-flex items-center justify-center font-medium transition-all duration-300 rounded-xl px-6 py-2.5 text-sm bg-navy text-white hover:bg-navy-light shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy cursor-pointer"
+              >
+                Learn More About Us
+                <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
