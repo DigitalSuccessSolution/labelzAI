@@ -96,12 +96,13 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-md border-b border-off-white-dark py-3"
-          : "bg-white py-4"
-        }`}
-    >
+    <>
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+            ? "bg-white/90 backdrop-blur-md shadow-md border-b border-off-white-dark py-3"
+            : "bg-white py-4"
+          }`}
+      >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center">
@@ -229,9 +230,10 @@ export default function Navbar() {
           {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
+    </header>
 
-      {/* Mobile Drawer — Full Screen Overlay */}
-      <div
+    {/* Mobile Drawer — Full Screen Overlay */}
+    <div
         className={`lg:hidden fixed inset-0 z-[60] bg-white transition-all duration-300 overflow-y-auto flex flex-col ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
@@ -346,6 +348,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
