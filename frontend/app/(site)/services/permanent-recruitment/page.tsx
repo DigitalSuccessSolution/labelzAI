@@ -7,7 +7,6 @@ import {
   Cpu,
   Briefcase,
   CheckCircle2,
-  Sparkles,
   Check,
   Users,
   Search,
@@ -277,64 +276,53 @@ requirement definition to onboarding support.
       </section>
 
       {/* 5. Why Choose LabelzAI Checklist Grid */}
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden bg-[radial-gradient(circle_at_top_right,rgba(122,190,244,0.05),transparent_45%)]">
+      <section className="py-14 md:py-20 bg-off-white/40 relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-            {/* Left: Meeting Image with premium decorations */}
+          {/* Section heading centered above grid */}
+          <div className="text-center mb-12">
+            <Badge variant="secondary">Value Proposition</Badge>
+            <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
+              Why Organizations Choose LabelzAI Techservices
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start max-w-6xl mx-auto">
+            {/* Left: Meeting Image */}
             <div className="relative">
-              {/* Glowing decorative backdrops */}
               <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-[#7ABEF4]/15 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -top-6 -right-6 w-48 h-48 bg-accent-gold/10 rounded-full blur-3xl pointer-events-none" />
-              
-              <div className="relative overflow-hidden rounded-3xl shadow-xl border border-off-white-dark h-[380px] w-full group z-10">
+              <div className="relative overflow-hidden rounded-3xl shadow-xl border border-off-white-dark h-[460px] w-full z-10">
                 <Image
                   src="/images/image.png"
                   alt="Corporate team meeting"
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover"
                 />
-                
-                {/* Floating analytics stats card overlay */}
-                <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-sm shadow-xl rounded-2xl p-4 border border-off-white-dark flex items-center space-x-3 transition-transform duration-300 group-hover:translate-y-[-4px]">
-                  <div className="w-10 h-10 rounded-full bg-[#7ABEF4]/10 flex items-center justify-center text-navy">
-                    <Sparkles className="h-5 w-5 animate-pulse text-navy" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-navy-gray uppercase font-semibold tracking-wider">Evaluation Accuracy</p>
-                    <h4 className="text-sm font-bold text-navy font-poppins">98.4% Precision</h4>
-                  </div>
-                </div>
               </div>
             </div>
 
             {/* Right: Checklists */}
-            <div>
-              <Badge variant="secondary">Value Proposition</Badge>
-              <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight mb-8">
-                Why Organizations Choose LabelzAI Techservices
-              </h2>
-              <div className="space-y-4">
-                {checklistItems.map((item) => {
-                  const words = item.split(" ");
-                  const boldCount = 2; // bold the first 2 words
-                  const boldPart = words.slice(0, boldCount).join(" ");
-                  const normalPart = words.slice(boldCount).join(" ");
+            <div className="space-y-3 pt-2">
+              {checklistItems.map((item) => {
+                const words = item.split(" ");
+                const boldCount = 2;
+                const boldPart = words.slice(0, boldCount).join(" ");
+                const normalPart = words.slice(boldCount).join(" ");
 
-                  return (
-                    <div
-                      key={item}
-                      className="group flex items-start bg-white border border-off-white-dark rounded-2xl p-5 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      <div className="w-9 h-9 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0 text-accent-gold mr-4 group-hover:bg-navy group-hover:text-white transition-all duration-300">
-                        <Check className="h-5 w-5" />
-                      </div>
-                      <p className="text-xs md:text-sm text-navy font-inter leading-relaxed mt-1">
-                        <span className="font-semibold text-navy">{boldPart}</span> {normalPart}
-                      </p>
+                return (
+                  <div
+                    key={item}
+                    className="group flex items-start bg-white border border-off-white-dark rounded-2xl p-5 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0 text-accent-gold mr-4 mt-0.5 group-hover:bg-navy group-hover:text-white transition-all duration-300">
+                      <Check className="h-5 w-5" />
                     </div>
-                  );
-                })}
-              </div>
+                    <p className="text-sm text-navy font-inter leading-relaxed mt-1">
+                      <span className="font-semibold text-navy">{boldPart}</span> {normalPart}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -342,8 +330,13 @@ requirement definition to onboarding support.
 
       {/* 6. Closing CTA Section */}
       <section className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-5xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark group">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          {/* Paragraph outside CTA box */}
+          <p className="text-base md:text-lg text-navy-gray leading-relaxed max-w-3xl mx-auto font-inter text-center mb-10">
+            Whether you&apos;re scaling an engineering team, filling a critical leadership vacancy, or building out field operations staff, LabelzAI Techservices LLP provides the recruitment infrastructure to hire right, hire fast, and hire for the long term.
+          </p>
+
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
               <Image
@@ -356,23 +349,16 @@ requirement definition to onboarding support.
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent opacity-80" />
             </div>
 
-            <div className="relative z-10 p-6 md:p-8 text-center space-y-4">
-              <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-2xl mx-auto font-inter">
-                Whether you&apos;re scaling an engineering team, filling a critical leadership vacancy, or building out field operations staff, LabelzAI Techservices LLP provides the recruitment infrastructure to hire right, hire fast, and hire for the long term.
-              </p>
-
-              <p className="text-xl sm:text-2xl md:text-3xl font-normal font-poppins text-white leading-snug tracking-tight max-w-2xl mx-auto">
+            <div className="relative z-10 px-8 md:px-16 py-14 text-center flex flex-col items-center gap-5">
+              <p className="text-xl sm:text-2xl md:text-3xl font-normal font-poppins text-white leading-snug tracking-tight max-w-2xl">
                 Get in touch to discuss your hiring requirements and build a staffing plan tailored to your sector.
               </p>
-
-              <div className="pt-2">
-                <Link href="/contact" className="inline-block">
-                  <button className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
-                    Contact Us
-                    <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300" />
-                  </button>
-                </Link>
-              </div>
+              <Link href="/contact" className="inline-block mt-2">
+                <button className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
+                  Partner with LabelzAI
+                  <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

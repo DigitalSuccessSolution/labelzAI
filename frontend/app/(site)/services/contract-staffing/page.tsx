@@ -6,8 +6,6 @@ import {
   Zap,
   ShieldCheck,
   Check,
-  Users,
-  Clock,
   CreditCard,
   RefreshCw,
   TrendingUp,
@@ -61,7 +59,8 @@ export default function ContractStaffingPage() {
   return (
     <>
       {/* Responsive clip-path style block for desktop viewports only */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @media (min-width: 1024px) {
           .custom-clipped-hero {
             clip-path: url(#slanted-cut-curve);
@@ -78,12 +77,11 @@ export default function ContractStaffingPage() {
         </defs>
       </svg>
 
-      {/* 1. Page Header (Full Bleed Edge-to-Edge Hero Layout with Diagonal Cut) */}
+      {/* 1. Page Header */}
       <section className="bg-white border-b border-off-white-dark relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[320px] lg:min-h-[440px]">
-          {/* Left Block (Text Content) */}
+          {/* Left Block */}
           <div className="lg:col-span-5 flex flex-col justify-center px-6 py-10 md:py-16 lg:px-12 xl:px-20 bg-gradient-to-r from-[#7ABEF4]/12 via-[#7ABEF4]/3 to-white text-navy relative z-10">
-            {/* Background design elements */}
             <div className="absolute top-0 left-0 w-80 h-80 bg-accent-gold/3 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
             <div className="max-w-xl relative z-10 pb-8 lg:pb-12">
               <span className="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-gold bg-accent-gold/10 rounded-full mb-6">
@@ -155,7 +153,7 @@ export default function ContractStaffingPage() {
         </div>
       </section>
 
-      {/* 3. What Our Contract Staffing Delivers (Workflow Cards Style) */}
+      {/* 3. What Our Contract Staffing Delivers */}
       <section className="py-12 md:py-16 bg-white border-t border-off-white-dark">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -163,9 +161,6 @@ export default function ContractStaffingPage() {
             <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight">
               What Our Contract Staffing Delivers
             </h2>
-            <p className="mt-2 text-sm text-navy-gray max-w-2xl mx-auto font-inter">
-              Our contract staffing model addresses workforce gaps with speed, compliance, and operational excellence — enabling businesses to scale without the overhead of permanent hiring.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
@@ -189,66 +184,54 @@ export default function ContractStaffingPage() {
         </div>
       </section>
 
-      {/* 4. Why Choose LabelzAI Contract Staffing Checklist Grid */}
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden bg-[radial-gradient(circle_at_top_right,rgba(122,190,244,0.05),transparent_45%)] border-t border-off-white-dark">
+      {/* 4. Why Choose LabelzAI Contract Staffing — Value Proposition */}
+      <section className="py-14 md:py-20 bg-off-white/40 relative overflow-hidden border-t border-off-white-dark">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-            {/* Left: Illustration with premium decorations */}
-            <div className="lg:col-span-4 relative">
-              {/* Glowing decorative backdrops */}
+          {/* Section heading centered above grid */}
+          <div className="text-center mb-12">
+            <Badge variant="secondary">Value Proposition</Badge>
+            <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
+              Why Choose LabelzAI Contract Staffing?
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start max-w-6xl mx-auto">
+            {/* Left: Image */}
+            <div className="relative">
               <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-[#7ABEF4]/15 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -top-6 -right-6 w-48 h-48 bg-accent-gold/10 rounded-full blur-3xl pointer-events-none" />
-              
-              <div className="relative overflow-hidden rounded-3xl shadow-xl border border-off-white-dark h-[380px] w-full group z-10">
+              <div className="relative overflow-hidden rounded-3xl shadow-xl border border-off-white-dark h-[460px] w-full z-10">
                 <Image
                   src="/images/contract-teamwork.png"
                   alt="Team collaborating on contract staffing solutions"
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover"
                 />
-                
-                {/* Floating analytics stats card overlay */}
-                <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-sm shadow-xl rounded-2xl p-4 border border-off-white-dark flex items-center space-x-3 transition-transform duration-300 group-hover:translate-y-[-4px]">
-                  <div className="w-10 h-10 rounded-full bg-[#7ABEF4]/10 flex items-center justify-center text-navy">
-                    <Clock className="h-5 w-5 animate-pulse text-navy" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-navy-gray uppercase font-semibold tracking-wider">Deployment</p>
-                    <h4 className="text-sm font-bold text-navy font-poppins">48-Hour Mobilization</h4>
-                  </div>
-                </div>
               </div>
             </div>
 
-            {/* Right: Checklists (2 Column Grid) */}
-            <div className="lg:col-span-8">
-              <Badge variant="secondary">Value Proposition</Badge>
-              <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight mb-4">
-                Why Choose LabelzAI Contract Staffing?
-              </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                {checklistItems.map((item) => {
-                  const words = item.split(" ");
-                  const boldCount = 2; // bold the first 2 words
-                  const boldPart = words.slice(0, boldCount).join(" ");
-                  const normalPart = words.slice(boldCount).join(" ");
+            {/* Right: Checklists — 2 column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+              {checklistItems.map((item) => {
+                const words = item.split(" ");
+                const boldCount = 2;
+                const boldPart = words.slice(0, boldCount).join(" ");
+                const normalPart = words.slice(boldCount).join(" ");
 
-                  return (
-                    <div
-                      key={item}
-                      className="group flex items-start bg-white border border-off-white-dark rounded-2xl p-4 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0 text-accent-gold mr-3.5 group-hover:bg-navy group-hover:text-white transition-all duration-300">
-                        <Check className="h-4 w-4" />
-                      </div>
-                      <p className="text-xs text-navy font-inter leading-relaxed mt-0.5">
-                        <span className="font-semibold text-navy">{boldPart}</span> {normalPart}
-                      </p>
+                return (
+                  <div
+                    key={item}
+                    className="group flex items-start bg-white border border-off-white-dark rounded-2xl p-4 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0 text-accent-gold mr-3.5 mt-0.5 group-hover:bg-navy group-hover:text-white transition-all duration-300">
+                      <Check className="h-4 w-4" />
                     </div>
-                  );
-                })}
-              </div>
+                    <p className="text-xs text-navy font-inter leading-relaxed mt-0.5">
+                      <span className="font-semibold text-navy">{boldPart}</span> {normalPart}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -256,8 +239,13 @@ export default function ContractStaffingPage() {
 
       {/* 5. Closing CTA Section */}
       <section className="py-12 md:py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-5xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark group">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          {/* Paragraph outside CTA box */}
+          <p className="text-base md:text-lg text-navy-gray leading-relaxed max-w-3xl mx-auto font-inter text-center mb-10">
+            If your business needs dependable, compliant, and rapidly deployable talent — whether IT or Non-IT — LabelzAI&apos;s contract staffing division is built to deliver. Get in touch today to discuss your workforce requirements and build a staffing plan aligned with your project timelines.
+          </p>
+
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
               <Image
@@ -266,27 +254,20 @@ export default function ContractStaffingPage() {
                 fill
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-navy/85 mix-blend-multiply" />
+              <div className="absolute inset-0 bg-navy/60 mix-blend-multiply" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent opacity-80" />
             </div>
 
-            <div className="relative z-10 p-6 md:p-8 text-center space-y-4">
-              <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-3xl mx-auto font-inter">
-                If your business needs dependable, compliant, and rapidly deployable talent — whether IT or Non-IT — LabelzAI&apos;s contract staffing division is built to deliver. Get in touch today to discuss your workforce requirements and build a staffing plan aligned with your project timelines.
+            <div className="relative z-10 px-8 md:px-16 py-14 text-center flex flex-col items-center gap-5">
+              <p className="text-xl sm:text-2xl md:text-3xl font-normal font-poppins text-white leading-snug tracking-tight max-w-2xl">
+                Scale Fast. Hire Smart. Stay Compliant.
               </p>
-
-              <p className="text-xl sm:text-2xl md:text-3xl font-normal font-poppins text-white leading-snug tracking-tight max-w-2xl mx-auto">
-                Contract Staffing is not just hiring — it is workforce agility.
-              </p>
-
-              <div className="pt-2">
-                <Link href="/contact" className="inline-block">
-                  <button className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
-                    Contact Us
-                    <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300" />
-                  </button>
-                </Link>
-              </div>
+              <Link href="/contact" className="inline-block mt-2">
+                <button className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-base font-semibold bg-white text-navy hover:bg-white/95 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
+                  Partner with LabelzAI
+                  <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>

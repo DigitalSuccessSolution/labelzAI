@@ -36,22 +36,21 @@ export default function Hero() {
                 Next-Generation HR & Recruitment
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-[32px] font-normal font-poppins text-navy leading-tight mb-6 tracking-tight">
-                <span className="whitespace-nowrap">Strategic, Intelligence-Driven</span> <br className="hidden sm:inline" /> Workforce Solutions
+                Strategic, Intelligence-Driven <br className="hidden sm:inline" /> Workforce Solutions
               </h1>
               <p className="text-sm md:text-base text-navy-gray leading-relaxed mb-8 font-inter">
                 In today&apos;s rapidly evolving talent landscape, organizations require more than conventional hiring — they demand strategic, intelligence-driven workforce solutions that deliver precision, speed, and long-term value.
               </p>
               
-              {/* Buttons */}
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-row flex-wrap gap-3 pt-2">
                 <Link href="/contact" className="inline-block">
-                  <button className="group inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-sm font-semibold bg-navy text-white hover:bg-navy/90 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
+                  <button className="group inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold bg-navy text-white hover:bg-navy/90 hover:shadow-lg transition-all duration-300 focus:outline-none cursor-pointer">
                     Get in Touch
                     <ArrowRight className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                   </button>
                 </Link>
                 <Link href="#industries" className="inline-block">
-                  <button className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-sm font-semibold border border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300 focus:outline-none cursor-pointer">
+                  <button className="inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300 focus:outline-none cursor-pointer">
                     Explore Industries
                   </button>
                 </Link>
@@ -59,12 +58,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Block (Image with Slanted Cut) */}
-          <div className="lg:col-span-7 relative min-h-[240px] lg:min-h-full overflow-hidden bg-white custom-clipped-hero">
+          {/* Right Block (Image) — first on mobile, right on desktop */}
+          <div className="order-first lg:order-last lg:col-span-7 relative min-h-[220px] lg:min-h-full overflow-hidden bg-white custom-clipped-hero">
             <Image
               src="/images/hero.png"
               alt="LabelzAI Techservices Hero Visual"
               fill
+              sizes="(max-width: 768px) 100vw, 58vw"
               className="object-cover object-center"
               priority
             />

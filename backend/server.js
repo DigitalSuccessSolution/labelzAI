@@ -7,6 +7,7 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require("./routes/jobRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const enquiryRoutes = require("./routes/enquiryRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,6 +39,7 @@ mongoose
 app.use("/api/admin", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/enquiries", enquiryRoutes);
 
 // Health check route
 app.get("/health", (req, res) => {

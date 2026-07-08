@@ -68,6 +68,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   // Close mobile menu and scroll to top on route change
   useEffect(() => {
     setIsOpen(false);
@@ -98,7 +110,8 @@ export default function Navbar() {
             alt="LabelzAI Techservices LLP"
             width={160}
             height={48}
-            className="h-10 md:h-12 w-auto object-contain"
+            className="h-10 md:h-12 object-contain"
+            style={{ width: 'auto' }}
             priority
           />
         </Link>
@@ -217,12 +230,35 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer — Full Screen Overlay */}
       <div
-        className={`lg:hidden fixed inset-x-0 top-[65px] bg-white border-b border-off-white-dark shadow-2xl transition-all duration-300 overflow-y-auto max-h-[calc(100vh-65px)] ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-          }`}
+        className={`lg:hidden fixed inset-0 z-[60] bg-white transition-all duration-300 overflow-y-auto flex flex-col ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
       >
-        <div className="px-4 py-6 space-y-4">
+        {/* Drawer Header */}
+        <div className="flex items-center justify-between px-4 py-4 border-b border-off-white-dark sticky top-0 bg-white z-10">
+          <Link href="/" onClick={() => setIsOpen(false)}>
+            <Image
+              src="/newlogo.png"
+              alt="LabelzAI Techservices LLP"
+              width={140}
+              height={44}
+              className="h-9 object-contain"
+              style={{ width: 'auto' }}
+            />
+          </Link>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 rounded-xl text-navy hover:bg-off-white-dark transition-all focus:outline-none cursor-pointer"
+            aria-label="Close Menu"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Drawer Content */}
+        <div className="px-4 py-6 space-y-4 flex-1">
           {NAV_ITEMS.map((item) => {
             const hasChildren = item.children && item.children.length > 0;
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -232,21 +268,28 @@ export default function Navbar() {
                 <div key={item.name} className="space-y-1">
                   <button
                     onClick={() => toggleDropdown(item.name)}
-                    className={`flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${isActive
+                    className={`flex items-center justify-between w-full px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                      isActive
                         ? "text-accent-teal bg-accent-teal/5"
                         : "text-navy hover:bg-off-white-dark"
-                      }`}
+                    }`}
                   >
                     <span>{item.name}</span>
                     <ChevronDown
-                      className={`h-4 w-4 transition-transform duration-300 ${activeDropdown === item.name ? "rotate-180 text-accent-gold" : "text-navy/55"
-                        }`}
+                      className={`h-4 w-4 transition-transform duration-300 ${
+                        activeDropdown === item.name ? "rotate-180 text-accent-gold" : "text-navy/55"
+                      }`}
                     />
                   </button>
 
                   <div
-                    className={`pl-4 space-y-1 transition-all duration-300 ${activeDropdown === item.name ? "block" : "hidden"
-                      }`}
+                    className={`pl-4 space-y-1 overflow-hidden transition-all duration-400 ease-in-out ${
+                      activeDropdown === item.name
+                        ? item.name === "Industries"
+                          ? "max-h-[600px] opacity-100 mt-1"
+                          : "max-h-[300px] opacity-100 mt-1"
+                        : "max-h-0 opacity-0"
+                    }`}
                   >
                     {item.children?.map((child) => {
                       const Icon = dropdownIconMap[child.name] || Settings;
@@ -281,24 +324,18 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${pathname === item.href
+                className={`block px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                  pathname === item.href
                     ? "text-accent-teal bg-accent-teal/5"
                     : "text-navy hover:bg-off-white-dark"
-                  }`}
+                }`}
               >
                 {item.name}
               </Link>
             );
           })}
 
-          <div className="pt-4 border-t border-off-white-dark space-y-3">
-            <a
-              href={`tel:${COMPANY_INFO.phone.replace(/\s+/g, "")}`}
-              className="flex items-center space-x-3 px-4 py-2 text-sm text-navy hover:text-accent-teal"
-            >
-              <PhoneCall className="h-4 w-4 text-accent-teal" />
-              <span className="font-semibold">{COMPANY_INFO.phone}</span>
-            </a>
+          <div className="pt-4 border-t border-off-white-dark">
             <div className="px-4">
               <Link href="/contact" className="block w-full">
                 <Button variant="secondary" className="w-full">

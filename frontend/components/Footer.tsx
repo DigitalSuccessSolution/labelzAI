@@ -37,24 +37,25 @@ export default function Footer() {
   return (
     <footer className="bg-navy text-white border-t border-navy-light pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          
-          {/* Col 1: Company Info */}
-          <div className="space-y-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+          {/* Col 1: Company Info — full width on mobile */}
+          <div className="col-span-2 lg:col-span-1 space-y-6">
             <Link href="/" className="flex items-center">
               <Image
                 src="/newlogo.png"
                 alt="LabelzAI Techservices LLP"
                 width={160}
                 height={48}
-                className="h-10 md:h-12 w-auto object-contain brightness-0 invert"
+                className="h-10 md:h-12 object-contain brightness-0 invert"
+                style={{ width: 'auto' }}
               />
             </Link>
-            
+
             <p className="text-sm text-off-white/80 leading-relaxed max-w-sm font-inter">
               {COMPANY_INFO.tagline}
             </p>
-            
+
             <div className="flex items-center space-x-4 pt-2">
               <a
                 href={COMPANY_INFO.socials.linkedin}
@@ -77,9 +78,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Services Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-poppins font-bold text-sm text-accent-gold uppercase tracking-wider">
+          {/* Col 2: Services Quick Links — full width on mobile */}
+          <div className="col-span-2 lg:col-span-1 space-y-4">
+            <h4 className="font-poppins font-bold text-sm text-[#38BDF8] uppercase tracking-wider">
               Our Services
             </h4>
             <ul className="space-y-2.5">
@@ -89,7 +90,7 @@ export default function Footer() {
                     href={item.href}
                     className="group flex items-center text-sm text-off-white/80 hover:text-white transition-all duration-300"
                   >
-                    <ArrowRight className="h-3.5 w-3.5 mr-1.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 text-accent-gold transition-all duration-300" />
+                    <ArrowRight className="h-3.5 w-3.5 mr-1.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 text-[#38BDF8] transition-all duration-300" />
                     <span>{item.name}</span>
                   </Link>
                 </li>
@@ -97,9 +98,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Platform Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-poppins font-bold text-sm text-accent-gold uppercase tracking-wider">
+          {/* Col 3: Platform Quick Links — half width on mobile */}
+          <div className="col-span-1 space-y-4">
+            <h4 className="font-poppins font-bold text-sm text-[#38BDF8] uppercase tracking-wider">
               Platform
             </h4>
             <ul className="space-y-2.5">
@@ -109,7 +110,7 @@ export default function Footer() {
                     href={item.href}
                     className="group flex items-center text-sm text-off-white/80 hover:text-white transition-all duration-300"
                   >
-                    <ArrowRight className="h-3.5 w-3.5 mr-1.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 text-accent-gold transition-all duration-300" />
+                    <ArrowRight className="h-3.5 w-3.5 mr-1.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 text-[#38BDF8] transition-all duration-300" />
                     <span>{item.name}</span>
                   </Link>
                 </li>
@@ -119,27 +120,27 @@ export default function Footer() {
                   href="/contact"
                   className="group flex items-center text-sm text-off-white/80 hover:text-white transition-all duration-300"
                 >
-                  <ArrowRight className="h-3.5 w-3.5 mr-1.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 text-accent-gold transition-all duration-300" />
+                  <ArrowRight className="h-3.5 w-3.5 mr-1.5 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 text-[#38BDF8] transition-all duration-300" />
                   <span>Contact Us</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Contact Links */}
-          <div className="space-y-6">
+          {/* Col 4: Contact Links — half width on mobile */}
+          <div className="col-span-1 space-y-6">
             <div className="space-y-4">
-              <h4 className="font-poppins font-bold text-sm text-accent-gold uppercase tracking-wider">
+              <h4 className="font-poppins font-bold text-sm text-[#38BDF8] uppercase tracking-wider">
                 Contact Us
               </h4>
               <ul className="space-y-3">
                 <li className="flex items-start space-x-2.5 text-sm text-off-white/80">
-                  <MapPin className="h-5 w-5 text-accent-gold shrink-0 mt-0.5" />
+                  <MapPin className="h-5 w-5 text-[#38BDF8] shrink-0 mt-0.5" />
                   <span className="leading-snug">{COMPANY_INFO.address}</span>
                 </li>
 
                 <li className="flex items-center space-x-2.5 text-sm text-off-white/80">
-                  <Mail className="h-4.5 w-4.5 text-accent-gold shrink-0" />
+                  <Mail className="h-4.5 w-4.5 text-[#38BDF8] shrink-0" />
                   <a
                     href={`mailto:${COMPANY_INFO.email}`}
                     className="hover:text-white transition-colors"
@@ -150,7 +151,7 @@ export default function Footer() {
               </ul>
             </div>
           </div>
-          
+
         </div>
 
         {/* Footer Bottom */}
@@ -162,7 +163,7 @@ export default function Footer() {
               href="https://digitalsuccesssolutions.in/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-off-white hover:text-accent-gold transition-colors font-semibold hover:underline"
+              className="text-off-white hover:text-[#38BDF8] transition-colors font-semibold hover:underline"
             >
               Digital Success Solutions
             </a>

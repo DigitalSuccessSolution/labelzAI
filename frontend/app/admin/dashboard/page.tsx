@@ -18,6 +18,9 @@ import {
   LogOut,
   Database,
   ChevronRight,
+  X,
+  FileText,
+  Building,
 } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 
@@ -46,10 +49,31 @@ interface Application {
   createdAt: string;
 }
 
+interface Enquiry {
+  id: string;
+  _id?: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  companyName?: string;
+  message: string;
+  createdAt: string;
+}
+
+
 export default function AdminDashboardPage() {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
-  const [activeTab, setActiveTab] = useState<"jobs" | "applications" | "db">("jobs");
+  const [activeTab, setActiveTab] = useState<"jobs" | "applications" | "enquiries">("jobs");
+  const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+  const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
+
+  const handleOpenApplicationDetails = (app: Application) => {
+    setSelectedApplication(app);
+    setIsPreviewOpen(false);
+  };
   
   // Dashboard states
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -106,12 +130,15 @@ export default function AdminDashboardPage() {
       setLoading(true);
       const jobsRes = await fetch("/api/jobs");
       const appsRes = await fetch("/api/applications");
+      const enquiriesRes = await fetch("/api/enquiries");
       
       const jobsData = await jobsRes.json();
       const appsData = await appsRes.json();
+      const enquiriesData = await enquiriesRes.json();
       
       if (jobsData.success) setJobs(jobsData.data);
       if (appsData.success) setApplications(appsData.data);
+      if (enquiriesData.success) setEnquiries(enquiriesData.data);
     } catch (error) {
       console.error("Error loading dashboard metrics:", error);
     } finally {
@@ -224,6 +251,30 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // Handle enquiry deletion
+  const handleDeleteEnquiry = async (id: string) => {
+    if (!confirm("Are you sure you want to remove this enquiry?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/enquiries", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setEnquiries((prev) => prev.filter((e) => (e._id || e.id) !== id));
+      } else {
+        alert(data.error || "Failed to remove enquiry.");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("Failed to delete enquiry.");
+    }
+  };
+
   // Handle resume download
   const handleDownloadResume = (app: Application) => {
     try {
@@ -287,7 +338,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Stats Panels */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-6xl mb-8">
           <div className="bg-white border border-off-white-dark rounded-2xl p-6 shadow-sm flex items-center space-x-4">
             <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold">
               <Briefcase className="h-6 w-6" />
@@ -305,6 +356,16 @@ export default function AdminDashboardPage() {
             <div>
               <p className="text-xs text-navy-gray uppercase font-semibold tracking-wider font-inter">Applications Received</p>
               <h3 className="text-2xl font-bold text-navy font-poppins mt-0.5">{applications.length}</h3>
+            </div>
+          </div>
+
+          <div className="bg-white border border-off-white-dark rounded-2xl p-6 shadow-sm flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+              <Mail className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-xs text-navy-gray uppercase font-semibold tracking-wider font-inter">Enquiries Received</p>
+              <h3 className="text-2xl font-bold text-navy font-poppins mt-0.5">{enquiries.length}</h3>
             </div>
           </div>
         </div>
@@ -332,19 +393,17 @@ export default function AdminDashboardPage() {
             >
               Applications ({applications.length})
             </button>
+            <button
+              onClick={() => setActiveTab("enquiries")}
+              className={`pb-4 px-6 text-sm font-semibold tracking-tight transition-all duration-300 border-b-2 focus:outline-none cursor-pointer ${
+                activeTab === "enquiries"
+                  ? "border-[#0B2545] text-[#0B2545]"
+                  : "border-transparent text-navy-gray hover:text-navy"
+              }`}
+            >
+              Enquiries ({enquiries.length})
+            </button>
           </div>
-          
-          <button
-            onClick={() => setActiveTab("db")}
-            className={`pb-4 px-4 text-xs font-semibold uppercase tracking-wider flex items-center transition-all duration-300 border-b-2 focus:outline-none cursor-pointer ${
-              activeTab === "db"
-                ? "border-accent-gold text-accent-gold"
-                : "border-transparent text-navy-gray hover:text-accent-gold"
-            }`}
-          >
-            <Database className="h-3.5 w-3.5 mr-1.5" />
-            DB Browser
-          </button>
         </div>
 
         {/* Dynamic content rendering */}
@@ -438,66 +497,48 @@ export default function AdminDashboardPage() {
                 return (
                   <div
                     key={id}
-                    className="bg-white border border-off-white-dark rounded-3xl p-6 shadow-sm relative hover:shadow-md transition-shadow"
+                    onClick={() => handleOpenApplicationDetails(app)}
+                    className="bg-white border border-off-white-dark rounded-3xl p-6 shadow-sm relative hover:shadow-md hover:border-accent-teal/30 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between"
                   >
-                    <button
-                      onClick={() => handleDeleteApplication(id)}
-                      className="absolute top-4 right-4 p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
-                      title="Remove application"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-
                     <div className="space-y-4">
                       {/* Header */}
-                      <div>
-                        <h4 className="text-lg font-semibold font-poppins text-navy">{app.fullName}</h4>
-                        <p className="text-xs font-semibold text-accent-gold mt-1 flex items-center">
-                          <Briefcase className="h-3 w-3 mr-1" />
-                          Applied for: {app.jobTitle}
-                        </p>
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="text-lg font-semibold font-poppins text-navy">{app.fullName}</h4>
+                          <p className="text-xs font-semibold text-accent-gold mt-1 flex items-center">
+                            <Briefcase className="h-3 w-3 mr-1" />
+                            Applied for: {app.jobTitle}
+                          </p>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteApplication(id);
+                          }}
+                          className="p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer z-10"
+                          title="Remove application"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
                       </div>
 
-                      {/* Details grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-inter text-navy-gray border-t border-b border-navy/5 py-3">
+                      {/* Details Summary */}
+                      <div className="grid grid-cols-2 gap-2 text-xs font-inter text-navy-gray border-t border-navy/5 pt-3">
                         <div className="flex items-center">
                           <Mail className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          <a href={`mailto:${app.email}`} className="hover:text-navy underline">{app.email}</a>
-                        </div>
-                        <div className="flex items-center">
-                          <Phone className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          <a href={`tel:${app.phone}`} className="hover:text-navy underline">{app.phone}</a>
+                          <span className="truncate">{app.email}</span>
                         </div>
                         <div className="flex items-center">
                           <Clock className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          Experience: {app.experience} {Number(app.experience) === 1 ? "Year" : "Years"}
-                        </div>
-                        <div className="flex items-center">
-                          <Calendar className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          Applied on: {new Date(app.createdAt).toLocaleDateString()}
+                          <span>Exp: {app.experience} {Number(app.experience) === 1 ? "Yr" : "Yrs"}</span>
                         </div>
                       </div>
+                    </div>
 
-                      {/* Cover Letter */}
-                      {app.coverLetter && (
-                        <div className="space-y-1">
-                          <p className="text-xs font-bold text-navy uppercase tracking-wider font-inter">Cover Letter</p>
-                          <p className="text-xs text-navy-gray bg-off-white p-3.5 rounded-xl font-inter leading-relaxed whitespace-pre-wrap max-h-28 overflow-y-auto">
-                            {app.coverLetter}
-                          </p>
-                        </div>
-                      )}
-
-                      {/* CV Download button */}
-                      <div className="pt-2">
-                        <button
-                          onClick={() => handleDownloadResume(app)}
-                          className="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-semibold bg-navy/5 text-navy hover:bg-navy hover:text-white transition-all duration-300 focus:outline-none cursor-pointer border border-navy/10"
-                        >
-                          <Download className="h-3.5 w-3.5 mr-2" />
-                          Download CV ({app.resumeName})
-                        </button>
-                      </div>
+                    {/* View Profile Action Link */}
+                    <div className="pt-4 mt-4 border-t border-navy/5 flex items-center justify-between text-xs font-semibold text-accent-teal">
+                      <span>View Full Profile</span>
+                      <ChevronRight className="h-4 w-4" />
                     </div>
                   </div>
                 );
@@ -505,59 +546,68 @@ export default function AdminDashboardPage() {
             </div>
           )
         ) : (
-          /* DB Browser Tab (MongoDB Real Connection Details) */
-          <div className="bg-white border border-off-white-dark rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
-            <div className="flex items-start space-x-4 border-b border-navy/5 pb-6">
-              <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center text-accent-gold shrink-0">
-                <Database className="h-6 w-6" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-lg font-semibold font-poppins text-navy">
-                  MongoDB Cloud / Local Database Server Connection
-                </h3>
-                <p className="text-sm text-navy-gray font-inter leading-relaxed">
-                  The Admin Console and Careers Portal now fetch and write data directly to a dedicated Node/Express backend communicating with MongoDB. Job and candidate records are structured in standard schemas.
-                </p>
-              </div>
+          /* Enquiries Tab */
+          enquiries.length === 0 ? (
+            <div className="text-center py-20 bg-white rounded-3xl border border-off-white-dark">
+              <Mail className="h-10 w-10 text-navy-gray/30 mx-auto mb-4" />
+              <p className="text-base font-semibold text-navy font-poppins mb-1">No Enquiries Yet</p>
+              <p className="text-xs text-navy-gray max-w-sm mx-auto">Sourcing lead enquiries submitted through the contact page will appear here.</p>
             </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {enquiries.map((enq) => {
+                const id = enq._id || enq.id;
+                return (
+                  <div
+                    key={id}
+                    onClick={() => setSelectedEnquiry(enq)}
+                    className="bg-white border border-off-white-dark rounded-3xl p-6 shadow-sm relative hover:shadow-md hover:border-blue-500/35 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                  >
+                    <div className="space-y-4">
+                      {/* Header */}
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="text-lg font-semibold font-poppins text-navy">{enq.fullName}</h4>
+                          <p className="text-xs font-semibold text-accent-teal mt-1 flex items-center">
+                            <Building className="h-3.5 w-3.5 mr-1.5" />
+                            {enq.companyName || "Personal / Individual"}
+                          </p>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteEnquiry(id);
+                          }}
+                          className="p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer z-10"
+                          title="Remove enquiry"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
 
-            {/* Connection Status Panels */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-inter text-navy">
-              <div className="p-4 bg-off-white border border-navy/5 rounded-2xl space-y-1">
-                <span className="text-[10px] text-navy-gray uppercase font-semibold font-inter">Backend API Link</span>
-                <p className="font-semibold">http://localhost:5000</p>
-              </div>
-              <div className="p-4 bg-off-white border border-navy/5 rounded-2xl space-y-1">
-                <span className="text-[10px] text-navy-gray uppercase font-semibold font-inter">Database Status</span>
-                <p className="font-semibold flex items-center">
-                  <span className={`w-2.5 h-2.5 rounded-full mr-2 inline-block ${dbStatus.database === "connected" ? "bg-emerald-500 animate-pulse" : "bg-red-500 animate-pulse"}`} />
-                  MongoDB {dbStatus.database === "connected" ? "Connected" : "Disconnected"}
-                </p>
-              </div>
-            </div>
+                      {/* Summary fields */}
+                      <div className="grid grid-cols-2 gap-2 text-xs font-inter text-navy-gray border-t border-navy/5 pt-3">
+                        <div className="flex items-center">
+                          <Mail className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
+                          <span className="truncate">{enq.email}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <Phone className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
+                          <span>{enq.phone}</span>
+                        </div>
+                      </div>
+                    </div>
 
-            {/* Collection payloads */}
-            <div className="space-y-3">
-              <span className="block text-xs font-bold text-navy uppercase tracking-wider font-inter">Live MongoDB Payload Snapshot</span>
-              <div className="bg-slate-950 rounded-2xl p-4 overflow-hidden border border-white/10 shadow-inner font-mono text-xs text-cyan-400">
-                <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-3">
-                  <span className="text-[10px] text-slate-500 font-mono">MongoDB Documents Overview</span>
-                  <span className="text-[10px] text-emerald-400 font-mono">● LIVE</span>
-                </div>
-                <pre className="max-h-[300px] overflow-y-auto leading-relaxed text-slate-300">
-                  {JSON.stringify({
-                    mongodbStatus: dbStatus.database,
-                    activeJobsCount: jobs.length,
-                    activeApplicationsCount: applications.length,
-                    collections: {
-                      jobs: jobs.map(j => ({ id: j._id || j.id, title: j.title, location: j.location, type: j.type })),
-                      applications: applications.map(a => ({ id: a._id || a.id, name: a.fullName, email: a.email, jobId: a.jobId, resume: a.resumeName }))
-                    }
-                  }, null, 2)}
-                </pre>
-              </div>
+                    {/* Footer link */}
+                    <div className="pt-4 mt-4 border-t border-navy/5 flex items-center justify-between text-xs font-semibold text-accent-teal">
+                      <span>View Message Details</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
+          )
         )}
 
       </div>
@@ -660,6 +710,233 @@ export default function AdminDashboardPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* View Application Details Modal */}
+      {selectedApplication && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 backdrop-blur-sm p-4 animate-fade-in">
+          <div className={`bg-white border border-off-white-dark rounded-3xl w-full p-6 md:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto relative transition-all duration-300 ${
+            isPreviewOpen ? "max-w-5xl" : "max-w-2xl"
+          }`}>
+            
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedApplication(null)}
+              className="absolute top-4 right-4 p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+              title="Close details"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className={`grid grid-cols-1 gap-6 ${isPreviewOpen ? "lg:grid-cols-2" : "grid-cols-1"}`}>
+              {/* Left Column: Profile Details */}
+              <div className="space-y-6">
+                {/* Candidate Header */}
+                <div className="border-b border-navy/5 pb-5">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-gold/10 text-accent-gold-hover">
+                    Candidate Profile
+                  </span>
+                  <h3 className="text-2xl font-normal font-poppins text-navy mt-2">
+                    {selectedApplication.fullName}
+                  </h3>
+                  <p className="text-sm font-semibold text-navy-gray mt-1 flex items-center">
+                    <Briefcase className="h-4 w-4 mr-1.5 text-accent-teal" />
+                    Applied for: <span className="text-navy ml-1">{selectedApplication.jobTitle}</span>
+                  </p>
+                </div>
+
+                {/* Candidate Information Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-off-white/40 p-4 rounded-2xl border border-off-white-dark text-sm font-inter">
+                  <div className="space-y-1">
+                    <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Email Address</span>
+                    <a href={`mailto:${selectedApplication.email}`} className="font-semibold text-navy hover:underline flex items-center">
+                      <Mail className="h-4 w-4 mr-2 text-navy-gray/60" />
+                      {selectedApplication.email}
+                    </a>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Phone Number</span>
+                    <a href={`tel:${selectedApplication.phone}`} className="font-semibold text-navy hover:underline flex items-center">
+                      <Phone className="h-4 w-4 mr-2 text-navy-gray/60" />
+                      {selectedApplication.phone}
+                    </a>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Experience</span>
+                    <span className="font-semibold text-navy flex items-center">
+                      <Clock className="h-4 w-4 mr-2 text-navy-gray/60" />
+                      {selectedApplication.experience} {Number(selectedApplication.experience) === 1 ? "Year" : "Years"}
+                    </span>
+                  </div>
+                  <div className="space-y-1">
+                    <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Date Applied</span>
+                    <span className="font-semibold text-navy flex items-center">
+                      <Calendar className="h-4 w-4 mr-2 text-navy-gray/60" />
+                      {new Date(selectedApplication.createdAt).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Cover Letter Details */}
+                {selectedApplication.coverLetter && (
+                  <div className="space-y-2">
+                    <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Cover Letter</span>
+                    <div className="bg-white border border-off-white-dark p-4 rounded-2xl text-sm font-inter text-navy-gray leading-relaxed whitespace-pre-wrap max-h-48 overflow-y-auto">
+                      {selectedApplication.coverLetter}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Right Column: Resume Live Preview */}
+              {isPreviewOpen && (
+                <div className="border-t lg:border-t-0 lg:border-l border-navy/5 pt-6 lg:pt-0 lg:pl-6 flex flex-col min-h-[450px]">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-bold text-navy uppercase tracking-wider font-inter">Resume Preview</span>
+                    <span className="text-xs text-navy-gray truncate max-w-[200px]">{selectedApplication.resumeName}</span>
+                  </div>
+                  <div className="flex-1 bg-off-white rounded-2xl border border-off-white-dark overflow-hidden relative min-h-[380px] h-full">
+                    {selectedApplication.resumeData.startsWith("data:application/pdf") || selectedApplication.resumeName.toLowerCase().endsWith(".pdf") ? (
+                      <iframe
+                        src={selectedApplication.resumeData}
+                        className="w-full h-full min-h-[380px] border-none"
+                        title="Resume Document"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                        <FileText className="h-12 w-12 text-navy-gray/40 mb-3" />
+                        <p className="text-sm font-semibold text-navy font-poppins">No Inline Preview</p>
+                        <p className="text-xs text-navy-gray mt-1 max-w-[240px]">
+                          This file type ({selectedApplication.resumeName.split('.').pop()?.toUpperCase()}) cannot be previewed directly in browser. Please download using the button below.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Resume File details and Actions */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-navy/5">
+              <button
+                type="button"
+                onClick={() => setIsPreviewOpen(!isPreviewOpen)}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-navy/10 bg-navy/5 text-navy hover:bg-navy/10 transition-all duration-300 focus:outline-none cursor-pointer"
+              >
+                {isPreviewOpen ? "Hide Resume Preview" : "Preview Resume"}
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDownloadResume(selectedApplication)}
+                className="w-full sm:flex-1 inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold bg-[#0B2545] text-white hover:bg-[#081a30] hover:shadow-md transition-all duration-300 focus:outline-none cursor-pointer"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Download CV ({selectedApplication.resumeName})
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const id = selectedApplication._id || selectedApplication.id;
+                  handleDeleteApplication(id);
+                  setSelectedApplication(null);
+                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-red-200 text-red-600 hover:bg-red-50 transition-all duration-300 focus:outline-none cursor-pointer"
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                Reject Application
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* View Enquiry Details Modal */}
+      {selectedEnquiry && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-white border border-off-white-dark rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto relative">
+            
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedEnquiry(null)}
+              className="absolute top-4 right-4 p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+              title="Close details"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Header */}
+            <div className="border-b border-navy/5 pb-5">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+                Business Sourcing Lead
+              </span>
+              <h3 className="text-2xl font-normal font-poppins text-navy mt-2">
+                {selectedEnquiry.fullName}
+              </h3>
+              {selectedEnquiry.companyName && (
+                <p className="text-sm font-semibold text-navy-gray mt-1 flex items-center">
+                  <Building className="h-4 w-4 mr-1.5 text-accent-teal" />
+                  Organization: <span className="text-navy ml-1">{selectedEnquiry.companyName}</span>
+                </p>
+              )}
+            </div>
+
+            {/* Information Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-off-white/40 p-4 rounded-2xl border border-off-white-dark text-sm font-inter">
+              <div className="space-y-1">
+                <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Email Address</span>
+                <a href={`mailto:${selectedEnquiry.email}`} className="font-semibold text-navy hover:underline flex items-center">
+                  <Mail className="h-4 w-4 mr-2 text-navy-gray/60" />
+                  {selectedEnquiry.email}
+                </a>
+              </div>
+              <div className="space-y-1">
+                <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Phone Number</span>
+                <a href={`tel:${selectedEnquiry.phone}`} className="font-semibold text-navy hover:underline flex items-center">
+                  <Phone className="h-4 w-4 mr-2 text-navy-gray/60" />
+                  {selectedEnquiry.phone}
+                </a>
+              </div>
+              <div className="space-y-1 col-span-2">
+                <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Submitted On</span>
+                <span className="font-semibold text-navy flex items-center">
+                  <Calendar className="h-4 w-4 mr-2 text-navy-gray/60" />
+                  {new Date(selectedEnquiry.createdAt).toLocaleString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </span>
+              </div>
+            </div>
+
+            {/* Sourcing Mandates / Message */}
+            <div className="space-y-2">
+              <span className="block text-[10px] text-navy-gray uppercase font-bold tracking-wider">Message / Sourcing Requirements</span>
+              <div className="bg-white border border-off-white-dark p-4 rounded-2xl text-sm font-inter text-navy-gray leading-relaxed whitespace-pre-wrap max-h-60 overflow-y-auto font-inter">
+                {selectedEnquiry.message}
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex justify-end pt-4 border-t border-navy/5">
+              <button
+                onClick={() => {
+                  const id = selectedEnquiry._id || selectedEnquiry.id;
+                  handleDeleteEnquiry(id);
+                  setSelectedEnquiry(null);
+                }}
+                className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-red-200 text-red-600 hover:bg-red-50 transition-all duration-300 focus:outline-none cursor-pointer"
+              >
+                <Trash2 className="h-4 w-4 mr-2" />
+                Delete Enquiry Record
+              </button>
+            </div>
           </div>
         </div>
       )}
