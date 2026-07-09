@@ -15,7 +15,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/labelz
 
 // Middlewares
 app.use(cors({
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000"],
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://labelz-ai.vercel.app"],
   credentials: true,
 }));
 app.use(express.json({ limit: "15mb" })); // Increase limit to parse CV base64 data safely
