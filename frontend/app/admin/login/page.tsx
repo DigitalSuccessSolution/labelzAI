@@ -8,8 +8,8 @@ import { Shield, User, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("admin@labelzai.com");
+  const [password, setPassword] = useState("LabelzAI@2026");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);

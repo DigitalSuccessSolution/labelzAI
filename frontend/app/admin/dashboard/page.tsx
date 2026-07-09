@@ -491,58 +491,63 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-navy-gray max-w-sm mx-auto">Candidate applications submitted through the Careers page will appear here.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {applications.map((app) => {
-                const id = app._id || app.id;
-                return (
-                  <div
-                    key={id}
-                    onClick={() => handleOpenApplicationDetails(app)}
-                    className="bg-white border border-off-white-dark rounded-3xl p-6 shadow-sm relative hover:shadow-md hover:border-accent-teal/30 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                  >
-                    <div className="space-y-4">
-                      {/* Header */}
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="text-lg font-semibold font-poppins text-navy">{app.fullName}</h4>
-                          <p className="text-xs font-semibold text-accent-gold mt-1 flex items-center">
-                            <Briefcase className="h-3 w-3 mr-1" />
-                            Applied for: {app.jobTitle}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteApplication(id);
-                          }}
-                          className="p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer z-10"
-                          title="Remove application"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-
-                      {/* Details Summary */}
-                      <div className="grid grid-cols-2 gap-2 text-xs font-inter text-navy-gray border-t border-navy/5 pt-3">
-                        <div className="flex items-center">
-                          <Mail className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          <span className="truncate">{app.email}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Clock className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          <span>Exp: {app.experience} {Number(app.experience) === 1 ? "Yr" : "Yrs"}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* View Profile Action Link */}
-                    <div className="pt-4 mt-4 border-t border-navy/5 flex items-center justify-between text-xs font-semibold text-accent-teal">
-                      <span>View Full Profile</span>
-                      <ChevronRight className="h-4 w-4" />
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="bg-white border border-off-white-dark rounded-3xl overflow-hidden shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-off-white border-b border-navy/5 text-navy-gray font-semibold text-xs font-inter uppercase">
+                      <th className="p-4 pl-6">Candidate Name</th>
+                      <th className="p-4">Position Applied</th>
+                      <th className="p-4">Email Address</th>
+                      <th className="p-4">Experience</th>
+                      <th className="p-4">Date Applied</th>
+                      <th className="p-4 pr-6 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-navy/5 text-sm font-inter text-navy">
+                    {applications.map((app) => {
+                      const id = app._id || app.id;
+                      return (
+                        <tr key={id} className="hover:bg-off-white/40 transition-colors">
+                          <td className="p-4 pl-6 font-semibold font-poppins">{app.fullName}</td>
+                          <td className="p-4">
+                            <span className="inline-flex items-center text-xs font-semibold text-accent-gold">
+                              <Briefcase className="h-3 w-3 mr-1 shrink-0" />
+                              {app.jobTitle}
+                            </span>
+                          </td>
+                          <td className="p-4 text-xs text-navy/80">{app.email}</td>
+                          <td className="p-4 text-xs text-navy-gray">
+                            {app.experience} {Number(app.experience) === 1 ? "Yr" : "Yrs"}
+                          </td>
+                          <td className="p-4 text-xs text-navy-gray">
+                            {new Date(app.createdAt).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </td>
+                          <td className="p-4 pr-6 text-right whitespace-nowrap space-x-2">
+                            <button
+                              onClick={() => handleOpenApplicationDetails(app)}
+                              className="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-accent-teal/10 text-accent-teal hover:bg-[#0B2545] hover:text-white transition-all duration-200 cursor-pointer"
+                            >
+                              View Full Profile
+                            </button>
+                            <button
+                              onClick={() => handleDeleteApplication(id)}
+                              className="p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                              title="Remove application"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )
         ) : (
@@ -554,58 +559,61 @@ export default function AdminDashboardPage() {
               <p className="text-xs text-navy-gray max-w-sm mx-auto">Sourcing lead enquiries submitted through the contact page will appear here.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {enquiries.map((enq) => {
-                const id = enq._id || enq.id;
-                return (
-                  <div
-                    key={id}
-                    onClick={() => setSelectedEnquiry(enq)}
-                    className="bg-white border border-off-white-dark rounded-3xl p-6 shadow-sm relative hover:shadow-md hover:border-blue-500/35 hover:scale-[1.01] transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                  >
-                    <div className="space-y-4">
-                      {/* Header */}
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h4 className="text-lg font-semibold font-poppins text-navy">{enq.fullName}</h4>
-                          <p className="text-xs font-semibold text-accent-teal mt-1 flex items-center">
-                            <Building className="h-3.5 w-3.5 mr-1.5" />
-                            {enq.companyName || "Personal / Individual"}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteEnquiry(id);
-                          }}
-                          className="p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer z-10"
-                          title="Remove enquiry"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-
-                      {/* Summary fields */}
-                      <div className="grid grid-cols-2 gap-2 text-xs font-inter text-navy-gray border-t border-navy/5 pt-3">
-                        <div className="flex items-center">
-                          <Mail className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          <span className="truncate">{enq.email}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Phone className="h-3.5 w-3.5 mr-2 shrink-0 text-navy-gray/60" />
-                          <span>{enq.phone}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Footer link */}
-                    <div className="pt-4 mt-4 border-t border-navy/5 flex items-center justify-between text-xs font-semibold text-accent-teal">
-                      <span>View Message Details</span>
-                      <ChevronRight className="h-4 w-4" />
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="bg-white border border-off-white-dark rounded-3xl overflow-hidden shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-off-white border-b border-navy/5 text-navy-gray font-semibold text-xs font-inter uppercase">
+                      <th className="p-4 pl-6">Full Name</th>
+                      <th className="p-4">Company</th>
+                      <th className="p-4">Email Address</th>
+                      <th className="p-4">Phone</th>
+                      <th className="p-4">Date Received</th>
+                      <th className="p-4 pr-6 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-navy/5 text-sm font-inter text-navy">
+                    {enquiries.map((enq) => {
+                      const id = enq._id || enq.id;
+                      return (
+                        <tr key={id} className="hover:bg-off-white/40 transition-colors">
+                          <td className="p-4 pl-6 font-semibold font-poppins">{enq.fullName}</td>
+                          <td className="p-4">
+                            <span className="inline-flex items-center text-xs font-semibold text-accent-teal">
+                              <Building className="h-3 w-3 mr-1 shrink-0" />
+                              {enq.companyName || "Personal / Individual"}
+                            </span>
+                          </td>
+                          <td className="p-4 text-xs text-navy/80">{enq.email}</td>
+                          <td className="p-4 text-xs text-navy-gray">{enq.phone}</td>
+                          <td className="p-4 text-xs text-navy-gray">
+                            {new Date(enq.createdAt).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </td>
+                          <td className="p-4 pr-6 text-right whitespace-nowrap space-x-2">
+                            <button
+                              onClick={() => setSelectedEnquiry(enq)}
+                              className="px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-blue-500/10 text-blue-600 hover:bg-[#0B2545] hover:text-white transition-all duration-200 cursor-pointer"
+                            >
+                              View Message
+                            </button>
+                            <button
+                              onClick={() => handleDeleteEnquiry(id)}
+                              className="p-2 text-navy-gray hover:text-red-500 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                              title="Remove enquiry"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )
         )}
@@ -822,22 +830,29 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* Resume File details and Actions */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-navy/5">
-              <button
-                type="button"
-                onClick={() => setIsPreviewOpen(!isPreviewOpen)}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-navy/10 bg-navy/5 text-navy hover:bg-navy/10 transition-all duration-300 focus:outline-none cursor-pointer"
-              >
-                {isPreviewOpen ? "Hide Resume Preview" : "Preview Resume"}
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDownloadResume(selectedApplication)}
-                className="w-full sm:flex-1 inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold bg-[#0B2545] text-white hover:bg-[#081a30] hover:shadow-md transition-all duration-300 focus:outline-none cursor-pointer"
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Download CV ({selectedApplication.resumeName})
-              </button>
+            <div className="flex flex-col gap-3 pt-4 border-t border-navy/5">
+              {/* Top Row: Preview + Download */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => setIsPreviewOpen(!isPreviewOpen)}
+                  className="sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-navy/10 bg-navy/5 text-navy hover:bg-navy/10 transition-all duration-300 focus:outline-none cursor-pointer whitespace-nowrap shrink-0"
+                >
+                  {isPreviewOpen ? "Hide Resume Preview" : "Preview Resume"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDownloadResume(selectedApplication)}
+                  className="flex-1 min-w-0 inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold bg-[#0B2545] text-white hover:bg-[#081a30] hover:shadow-md transition-all duration-300 focus:outline-none cursor-pointer"
+                >
+                  <Download className="h-4 w-4 mr-2 shrink-0" />
+                  <span className="whitespace-nowrap">Download CV</span>
+                  <span className="truncate ml-1 text-xs opacity-70 font-normal" title={selectedApplication.resumeName}>
+                    ({selectedApplication.resumeName})
+                  </span>
+                </button>
+              </div>
+              {/* Bottom Row: Reject */}
               <button
                 type="button"
                 onClick={() => {
@@ -845,7 +860,7 @@ export default function AdminDashboardPage() {
                   handleDeleteApplication(id);
                   setSelectedApplication(null);
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-red-200 text-red-600 hover:bg-red-50 transition-all duration-300 focus:outline-none cursor-pointer"
+                className="w-full inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border border-red-200 text-red-600 hover:bg-red-50 transition-all duration-300 focus:outline-none cursor-pointer"
               >
                 <Trash2 className="h-4 w-4 mr-2" />
                 Reject Application

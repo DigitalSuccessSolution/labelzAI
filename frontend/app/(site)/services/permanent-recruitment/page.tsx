@@ -179,7 +179,7 @@ requirement definition to onboarding support.
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Left Card: IT Recruitment */}
-            <div className="group bg-white border border-off-white-dark rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-xl hover:border-accent-gold/30 transition-all duration-300 flex flex-col justify-between">
+            <div className="group bg-[#F0F5FA] border border-off-white-dark rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-xl hover:border-accent-gold/30 transition-all duration-300 flex flex-col justify-between">
               <div>
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="w-12 h-12 bg-accent-gold/5 rounded-full flex items-center justify-center shrink-0">
@@ -210,7 +210,7 @@ requirement definition to onboarding support.
             </div>
 
             {/* Right Card: Non-IT Staffing */}
-            <div className="group bg-white border border-off-white-dark rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-xl hover:border-accent-gold/30 transition-all duration-300 flex flex-col justify-between">
+            <div className="group bg-[#F0F5FA] border border-off-white-dark rounded-3xl p-8 md:p-10 shadow-lg hover:shadow-xl hover:border-accent-gold/30 transition-all duration-300 flex flex-col justify-between">
               <div>
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="w-12 h-12 bg-accent-gold/5 rounded-full flex items-center justify-center shrink-0">
@@ -250,7 +250,7 @@ requirement definition to onboarding support.
           <div className="flex flex-col lg:flex-row items-stretch justify-between max-w-6xl mx-auto gap-6 lg:gap-4">
             {processSteps.map((step, idx) => (
               <React.Fragment key={step.num}>
-                <div className="group flex-1 flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-off-white-dark shadow-sm hover:border-accent-gold/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                <div className="group flex-1 flex flex-col items-center text-center p-6 bg-[#F0F5FA] rounded-2xl border border-off-white-dark shadow-sm hover:border-accent-gold/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                   <div className="w-16 h-16 rounded-full border border-off-white-dark bg-accent-gold/5 shadow-sm flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-white group-hover:border-navy transition-all duration-300 text-accent-gold">
                     <step.icon className="h-6 w-6 transition-colors duration-300" />
                   </div>
@@ -312,7 +312,7 @@ requirement definition to onboarding support.
                 return (
                   <div
                     key={item}
-                    className="group flex items-start bg-white border border-off-white-dark rounded-2xl p-5 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
+                    className="group flex items-start bg-[#F0F5FA] border border-off-white-dark rounded-2xl p-5 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     <div className="w-9 h-9 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0 text-accent-gold mr-4 mt-0.5 group-hover:bg-navy group-hover:text-white transition-all duration-300">
                       <Check className="h-5 w-5" />

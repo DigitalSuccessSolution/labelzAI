@@ -51,3 +51,4 @@ app.listen(PORT, () => {
   console.log(`LabelzAI Server is running on port ${PORT}`);
   console.log(`Database source URI: ${MONGODB_URI}`);
 });
+// Reload database configs

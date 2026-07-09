@@ -182,7 +182,7 @@ export default function ExecutiveSearchPage() {
             {whyExecutivePoints.map((point) => (
               <div
                 key={point.title}
-                className="group flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-off-white-dark shadow-sm hover:border-accent-gold/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                className="group flex flex-col items-center text-center p-6 bg-[#F0F5FA] rounded-2xl border border-off-white-dark shadow-sm hover:border-accent-gold/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="w-16 h-16 rounded-full border border-off-white-dark bg-accent-gold/5 shadow-sm flex items-center justify-center mb-6 group-hover:bg-navy group-hover:text-white group-hover:border-navy transition-all duration-300 text-accent-gold">
                   <point.icon className="h-6 w-6 transition-colors duration-300" />
@@ -236,7 +236,7 @@ export default function ExecutiveSearchPage() {
                 return (
                   <div
                     key={item}
-                    className="group flex items-start bg-white border border-off-white-dark rounded-2xl p-4 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
+                    className="group flex items-start bg-[#F0F5FA] border border-off-white-dark rounded-2xl p-4 hover:shadow-md hover:border-accent-gold/30 hover:-translate-y-0.5 transition-all duration-300"
                   >
                     <div className="w-8 h-8 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0 text-accent-gold mr-3.5 mt-0.5 group-hover:bg-navy group-hover:text-white transition-all duration-300">
                       <Check className="h-4 w-4" />

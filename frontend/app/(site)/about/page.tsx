@@ -76,7 +76,7 @@ export default function AboutPage() {
               <div className="absolute -inset-4 bg-gradient-to-br from-accent-gold/10 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative overflow-hidden rounded-2xl shadow-xl border border-off-white-dark h-[320px] sm:h-[450px] lg:h-[440px] w-full">
                 <Image
-                  src="/images/about-us.png"
+                  src="/images/aboutus.png"
                   alt="Professional team meeting in a high-tech corporate office"
                   width={960}
                   height={640}
@@ -92,7 +92,7 @@ export default function AboutPage() {
       {/* 3. Middle Section: Industry Portfolio */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight">
               Industries We Serve
             </h2>
@@ -128,13 +128,13 @@ export default function AboutPage() {
                 return (
                   <div
                     key={srv.title}
-                    className="group bg-white border border-[#e2e8f0]/80 rounded-2xl p-6 hover:shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:border-accent-gold/25 transition-all duration-300 flex flex-col justify-between h-full"
+                    className="group bg-[#f0f5fa] border border-[#e2e8f0]/80 rounded-2xl p-6 hover:shadow-[0_15px_35px_rgba(0,0,0,0.03)] hover:border-accent-gold/25 transition-all duration-300 flex flex-col justify-between h-full"
                   >
                     <div>
                       <div className="text-accent-gold mb-4">
                         <Icon className="h-7 w-7 transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-6" />
                       </div>
-                      <h3 className="text-base font-bold font-poppins text-navy mb-1.5 group-hover:text-accent-gold transition-colors duration-300">
+                      <h3 className="text-base font-semibold font-poppins text-navy mb-1.5 group-hover:text-accent-gold transition-colors duration-300">
                         {srv.title}
                       </h3>
                       <p className="text-xs md:text-sm text-navy-gray leading-relaxed font-inter font-normal">
@@ -149,7 +149,60 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 5. Closing Paragraph as Card CTA-Style Banner */}
+      {/* 5. Our Mission & Vision Sections */}
+      <section className="py-16 md:py-24 bg-white border-t border-navy/5">
+        <div className="container mx-auto px-4 md:px-6 space-y-20 md:space-y-28">
+
+          {/* Mission Grid */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Left Column: Text */}
+            <div className="lg:col-span-7 flex flex-col space-y-6">
+              <h2 className="text-3xl md:text-4.5xl font-semibold font-poppins text-navy">
+                Our Mission
+              </h2>
+              <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter font-normal">
+                LabelzAI Techservices is committed to bridging the widening gap between emerging technology demands and India&apos;s evolving talent ecosystem. As a trusted IT and Non-IT recruitment agency, our mission is to identify, assess, and deploy professionals equipped for tomorrow&apos;s roles — AI/ML engineers, data annotators, cloud architects, cybersecurity specialists, and automation experts — alongside core Non-IT talent across healthcare, pharma, and FMCG sectors. We deliver precision-driven staffing solutions and executive search services that anticipate industry shifts rather than react to them. By combining deep sector expertise with forward-looking workforce planning, LabelzAI empowers organizations to build future-ready teams, ensuring sustained competitiveness in an increasingly technology-driven, skills-based global economy.
+              </p>
+            </div>
+
+            {/* Right Column: Image */}
+            <div className="lg:col-span-5 relative h-[300px] sm:h-[360px] w-full rounded-2xl overflow-hidden border border-off-white-dark shadow-md bg-off-white">
+              <Image
+                src="/images/mission-visual.png"
+                alt="LabelzAI team collaboration representing our mission"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Vision Grid */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            {/* Left Column: Image (Ordered first on large screen) */}
+            <div className="lg:col-span-5 order-2 lg:order-1 relative h-[300px] sm:h-[360px] w-full rounded-2xl overflow-hidden border border-off-white-dark shadow-md bg-off-white">
+              <Image
+                src="/images/vision-visual.png"
+                alt="LabelzAI future growth vision looking over the horizon"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Right Column: Text (Ordered second on large screen) */}
+            <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col space-y-6">
+              <h2 className="text-3xl md:text-4.5xl font-semibold font-poppins text-navy">
+                Our Vision
+              </h2>
+              <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter font-normal">
+                LabelzAI envisions becoming India&apos;s most trusted talent acquisition partner, bridging the gap between skilled professionals and organizations across IT and Non-IT sectors. As a leading HR management and recruitment consultancy, we are committed to delivering scalable workforce solutions through data-driven candidate sourcing, rigorous screening protocols, and industry-specific hiring expertise. Our vision extends beyond transactional staffing — we aim to build long-term partnerships rooted in quality talent mapping, compliance-driven HR practices, and measurable placement success. By integrating technology with human insight, LabelzAI strives to redefine recruitment excellence, empowering businesses with the right talent and professionals with the right opportunities, consistently, ethically, and efficiently, nationwide.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. Closing Paragraph as Card CTA-Style Banner */}
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-5xl mx-auto relative rounded-3xl overflow-hidden shadow-2xl border border-off-white-dark group">

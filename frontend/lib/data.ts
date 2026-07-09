@@ -7,8 +7,7 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Mission & Vision", href: "/mission-vision" },
-  { name: "Why Choose Us", href: "/why-choose-us" },
+ 
   {
     name: "Services",
     href: "/services",
@@ -19,20 +18,22 @@ export const NAV_ITEMS: NavItem[] = [
       { name: "Executive Search (Headhunting / Retained Search)", href: "/services/executive-search", description: "Exclusive, high-level leadership search for C-suite and executive roles." },
     ],
   },
+   { name: "Industries We Serve", href: "/industries" },
+   { name: "Openings", href: "/openings" },
 ];
 
 export const INDUSTRIES = [
-  { name: "Information Technology (IT)", href: "/industries/it-technology", description: "Software development, cloud, AI, cybersecurity, and data science talent." },
-  { name: "Healthcare & Biotechnology", href: "/industries/healthcare-biotech", description: "Certified clinicians, lab researchers, biotech experts, and health administrators." },
-  { name: "Pharma & Life Sciences", href: "/industries/pharma-life-sciences", description: "Clinical research, formulation, QA/QC, and regulatory affairs professionals." },
-  { name: "Liquor & Beverages", href: "/industries/liquor-beverages", description: "Distillery operations, supply chain, brand management, and sales talent." },
-  { name: "E-Commerce", href: "/industries/e-commerce", description: "Digital marketing, product management, logistics, and operations specialists." },
-  { name: "Renewable Energy & ESG", href: "/industries/renewable-energy-esg", description: "Solar/wind engineers, sustainability consultants, and ESG compliance officers." },
-  { name: "Semiconductor & Electronics Manufacturing", href: "/industries/semiconductor-electronics", description: "VLSI design, assembly, quality testing, and hardware engineering talent." },
-  { name: "FinTech & BFSI", href: "/industries/fintech-bfsi", description: "Wealth management, banking operations, fintech development, and risk assessment." },
-  { name: "FMCG & FMCD", href: "/industries/fmcg-fmcd", description: "Brand management, trade marketing, retail distribution, and product logistics." },
-  { name: "Logistics", href: "/industries/logistics", description: "Warehouse management, cold-chain operations, freight forwarding, and logistics." },
-  { name: "Manufacturing (Automobile and Ancillaries)", href: "/industries/manufacturing-automobile", description: "Plant operations, automobile design, quality control, and assembly engineers." },
+  { name: "Information Technology (IT)", href: "/industries", image: "/Industry-Blocks/IT Industry.png", description: "Software development, cloud, AI, cybersecurity, and data science talent." },
+  { name: "Healthcare & Biotechnology", href: "/industries", image: "/Industry-Blocks/Healthcare & Bio Technology.png", description: "Certified clinicians, lab researchers, biotech experts, and health administrators." },
+  { name: "Pharma & Life Sciences", href: "/industries", image: "/Industry-Blocks/Pharma & Life Sciences.png", description: "Clinical research, formulation, QA/QC, and regulatory affairs professionals." },
+  { name: "Liquor & Beverages", href: "/industries", image: "/Industry-Blocks/Liquor & Beverages.png", description: "Distillery operations, supply chain, brand management, and sales talent." },
+  { name: "E-Commerce", href: "/industries", image: "/Industry-Blocks/Ecommerce.png", description: "Digital marketing, product management, logistics, and operations specialists." },
+  { name: "Renewable Energy & ESG", href: "/industries", image: "/Industry-Blocks/Renewable Energy & ESG.png", description: "Solar/wind engineers, sustainability consultants, and ESG compliance officers." },
+  { name: "Semiconductor & Electronics Manufacturing", href: "/industries", image: "/Industry-Blocks/Semiconductor & Electronics Manufacturing.png", description: "VLSI design, assembly, quality testing, and hardware engineering talent." },
+  { name: "FinTech & BFSI", href: "/industries", image: "/Industry-Blocks/FinTech & BFSI.png", description: "Wealth management, banking operations, fintech development, and risk assessment." },
+  { name: "FMCG & FMCD", href: "/industries", image: "/Industry-Blocks/fmcg & fmcd.png", description: "Brand management, trade marketing, retail distribution, and product logistics." },
+  { name: "Logistics", href: "/industries", image: "/Industry-Blocks/Logistics & Supply Chain.png", description: "Warehouse management, cold-chain operations, freight forwarding, and logistics." },
+  { name: "Manufacturing (Automobile and Ancillaries)", href: "/industries", image: "/Industry-Blocks/Automobile & Ancillary Manufacturing.png", description: "Plant operations, automobile design, quality control, and assembly engineers." },
 ];
 
 export interface ContentBlock {
