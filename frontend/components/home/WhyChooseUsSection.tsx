@@ -57,7 +57,7 @@ export default function WhyChooseUsSection() {
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-normal font-poppins text-navy tracking-tight leading-tight">
-            LabelzAI — Why Choose Us?
+          Why Choose Us?
           </h2>
           <p className="mt-6 text-sm md:text-base text-navy-gray leading-relaxed font-inter">
             In a competitive talent landscape, choosing the right recruitment partner defines your organization&apos;s growth trajectory. LabelzAI brings a structured, intelligence-driven approach to HR and recruitment — purpose-built for IT and Non-IT industries across PAN India.

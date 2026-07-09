@@ -98,9 +98,9 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 bg-white border-b border-off-white-dark ${scrolled
-            ? "shadow-md py-3"
-            : "shadow-sm py-4"
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+            ? "bg-white/95 backdrop-blur-md border-b border-off-white-dark shadow-md py-3"
+            : "bg-transparent border-b border-transparent py-4"
           }`}
       >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
