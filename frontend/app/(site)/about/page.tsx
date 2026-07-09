@@ -37,24 +37,8 @@ const hrServicesList = [
 export default function AboutPage() {
   return (
     <>
-      {/* 1. Page Header (Minimal Premium White Hero) */}
-      <section className="bg-white pt-16 pb-6 relative overflow-hidden">
-        {/* Soft background accents */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-accent-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent-gold/3 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" />
-
-        <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-normal font-poppins text-navy tracking-tight leading-tight">
-            About Us
-          </h1>
-          <p className="mt-6 text-base md:text-lg text-navy-gray max-w-2xl mx-auto leading-relaxed font-inter">
-            Operated on the principles of data intelligence and human expertise to build scalable talent solutions.
-          </p>
-        </div>
-      </section>
-
-      {/* 2. Two-Column Layout (Core Strategy) */}
-      <section className="py-12 md:py-16 bg-white">
+      {/* 1. Two-Column Layout (Core Strategy) */}
+      <section className="py-10 md:py-8 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content Column */}
@@ -90,18 +74,58 @@ export default function AboutPage() {
       </section>
 
       {/* 3. Middle Section: Industry Portfolio */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white border-t border-off-white-dark">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-8">
-            <h2 className="mt-4 text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight">
-              Industries We Serve
-            </h2>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
+            {/* Left Image Column */}
+            <div className="lg:col-span-6 relative group">
+              <div className="absolute -inset-4 bg-gradient-to-br from-[#7ABEF4]/10 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative overflow-hidden rounded-2xl shadow-xl border border-off-white-dark h-[300px] sm:h-[400px] w-full">
+                <Image
+                  src="/images/about-portfolio.png"
+                  alt="Global industry connection network map"
+                  fill
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+              </div>
+            </div>
 
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
-              We serve a diverse industry portfolio spanning Information Technology, Medical &amp; Healthcare, Pharmaceuticals, BFSI, Manufacturing, Liquor &amp; Beverages, FMCG, etc. — delivering end-to-end hiring solutions from executive search and lateral hiring to bulk recruitment and contract staffing.
-            </p>
+            {/* Right Content Column */}
+            <div className="lg:col-span-6 space-y-6">
+              <h2 className="text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
+                Industries We <span className="text-accent-gold font-semibold">Serve</span>
+              </h2>
+              <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
+                We serve a diverse industry portfolio spanning Information Technology, Medical &amp; Healthcare, Pharmaceuticals, BFSI, Manufacturing, Liquor &amp; Beverages, FMCG, etc. — delivering end-to-end hiring solutions from executive search and lateral hiring to bulk recruitment and contract staffing.
+              </p>
+              
+              {/* Sectors Tag Grid */}
+              <div className="pt-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-navy-gray/70 mb-4 font-inter">
+                  Core Segments & Verticals
+                </h4>
+                <div className="flex flex-wrap gap-2.5">
+                  {[
+                    "Information Technology",
+                    "Medical & Healthcare",
+                    "Pharmaceuticals",
+                    "BFSI",
+                    "Manufacturing",
+                    "Liquor & Beverages",
+                    "FMCG",
+                    "Other Growth Sectors"
+                  ].map((sector) => (
+                    <span 
+                      key={sector} 
+                      className="px-3.5 py-2 bg-[#f0f5fa] border border-[#e2e8f0] text-navy text-xs font-semibold rounded-full hover:border-accent-gold/30 hover:bg-white hover:shadow-sm transition-all duration-300"
+                    >
+                      {sector}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
