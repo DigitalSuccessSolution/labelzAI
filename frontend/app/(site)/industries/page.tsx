@@ -56,7 +56,7 @@ export default function IndustriesPage() {
           {/* Right Block (Image with Slanted Cut) */}
           <div className="lg:col-span-7 relative min-h-[240px] lg:min-h-full overflow-hidden bg-off-white custom-clipped-hero">
             <Image
-              src="/images/industry.png"
+              src="/images/indus.png"
               alt="Diverse industries and sectors collage"
               fill
               className="object-cover object-center"
