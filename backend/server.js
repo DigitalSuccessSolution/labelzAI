@@ -47,7 +47,7 @@ app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 
-// Health check route
+// Health check route   
 app.get("/health", (req, res) => {
   res.json({ status: "healthy", database: mongoose.connection.readyState === 1 ? "connected" : "disconnected" });
 });
