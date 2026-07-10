@@ -2,9 +2,9 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 
-const ADMIN_EMAIL = "admin@labelzai.com";
-const ADMIN_PASSWORD = "LabelzAI@2026";
-const SESSION_SECRET_TOKEN = process.env.SESSION_SECRET_TOKEN || "labelzai_secure_admin_session_token_2026";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const SESSION_SECRET_TOKEN = process.env.SESSION_SECRET_TOKEN;
 
 // POST /api/admin/login
 router.post("/login", (req, res) => {
