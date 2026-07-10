@@ -73,75 +73,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Middle Section: Industry Portfolio */}
+      {/* 3. HR Services in Feature-List Style */}
       <section className="py-12 md:py-16 bg-white border-t border-off-white-dark">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
-            {/* Left Image Column */}
-            <div className="lg:col-span-6 relative group">
-              <div className="absolute -inset-4 bg-gradient-to-br from-[#7ABEF4]/10 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative overflow-hidden rounded-2xl shadow-xl border border-off-white-dark h-[300px] sm:h-[400px] w-full">
-                <Image
-                  src="/images/about-portfolio.png"
-                  alt="Global industry connection network map"
-                  fill
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* Right Content Column */}
-            <div className="lg:col-span-6 space-y-6">
-              <h2 className="text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
-                Industries We <span className="text-accent-gold font-semibold">Serve</span>
-              </h2>
-              <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
-                We serve a diverse industry portfolio spanning Information Technology, Medical &amp; Healthcare, Pharmaceuticals, BFSI, Manufacturing, Liquor &amp; Beverages, FMCG, etc. — delivering end-to-end hiring solutions from executive search and lateral hiring to bulk recruitment and contract staffing.
-              </p>
-              
-              {/* Sectors Tag Grid */}
-              <div className="pt-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-navy-gray/70 mb-4 font-inter">
-                  Core Segments & Verticals
-                </h4>
-                <div className="flex flex-wrap gap-2.5">
-                  {[
-                    "Information Technology",
-                    "Medical & Healthcare",
-                    "Pharmaceuticals",
-                    "BFSI",
-                    "Manufacturing",
-                    "Liquor & Beverages",
-                    "FMCG",
-                    "Other Growth Sectors"
-                  ].map((sector) => (
-                    <span 
-                      key={sector} 
-                      className="px-3.5 py-2 bg-[#f0f5fa] border border-[#e2e8f0] text-navy text-xs font-semibold rounded-full hover:border-accent-gold/30 hover:bg-white hover:shadow-sm transition-all duration-300"
-                    >
-                      {sector}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. HR Services in Feature-List Style */}
-      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-normal font-poppins text-navy tracking-tight leading-tight">
-                Strategic Lifecycle Support
-              </h2>
+              <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
+                We serve a diverse industry portfolio spanning Information Technology, Medical &amp; Healthcare, Pharmaceuticals, BFSI, Manufacturing, Liquor &amp; Beverages, FMCG, etc. — delivering end-to-end hiring solutions from executive search and lateral hiring to bulk recruitment and contract staffing.
+              </p>
               <p className="text-base md:text-lg text-navy-gray leading-relaxed font-inter">
                 Our HR management services encompass workforce planning, onboarding optimization, compliance management, and employee lifecycle support — engineered to reduce operational overhead and improve retention rates.
               </p>
-              <p className="text-base text-navy-gray leading-relaxed font-inter pt-4 border-t border-navy/5">
+              <p className="text-base text-navy-gray leading-relaxed font-inter">
                 At LabelzAI, we don&apos;t just fill positions — we build scalable talent pipelines aligned to your long-term growth strategy. With deep domain expertise, a verified candidate network, and a structured delivery process, we ensure faster time-to-hire, lower attrition, and stronger team performance.
               </p>
             </div>

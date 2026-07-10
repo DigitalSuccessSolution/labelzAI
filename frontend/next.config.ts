@@ -10,10 +10,11 @@ const nextConfig: NextConfig = {
     ],
   },
   async rewrites() {
+    const backendUrl = process.env.BACKEND_API_URL || "http://localhost:5000";
     return [
       {
         source: "/api/:path*",
-        destination: "https://labelz-ai-8eym.vercel.app/api/:path*",
+        destination: `${backendUrl}/api/:path*`,
       },
     ];
   },

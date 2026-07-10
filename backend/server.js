@@ -14,8 +14,14 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/labelzai";
 
 // Middlewares
+const allowedOrigins = ["http://localhost:3000", "http://127.0.0.1:3000"];
+if (process.env.FRONTEND_URL) {
+  const customOrigins = process.env.FRONTEND_URL.split(",").map(url => url.trim());
+  allowedOrigins.push(...customOrigins);
+}
+
 app.use(cors({
-  origin: ["http://localhost:3000", "http://127.0.0.1:3000", "https://labelz-ai.vercel.app"],
+  origin: allowedOrigins,
   credentials: true,
 }));
 app.use(express.json({ limit: "15mb" })); // Increase limit to parse CV base64 data safely

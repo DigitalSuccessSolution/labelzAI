@@ -8,8 +8,8 @@ import { Shield, User, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("admin@labelzai.com");
-  const [password, setPassword] = useState("LabelzAI@2026");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -161,14 +161,7 @@ export default function AdminLoginPage() {
               {loading ? "Verifying..." : "Enter Dashboard"}
               <ArrowRight className="h-4.5 w-4.5 ml-2" />
             </button>
-
           </form>
-
-          {/* Dev credentials helper box */}
-          <div className="mt-8 pt-6 border-t border-[#f1f5f9] text-[10px] text-[#94a3b8] text-center font-inter">
-            <span>Username: <strong className="font-semibold text-[#475569]">admin@labelzai.com</strong> | Key: <strong className="font-semibold text-[#475569]">LabelzAI@2026</strong></span>
-          </div>
-
         </div>
 
         {/* Footer info */}
