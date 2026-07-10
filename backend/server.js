@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/labelzai";
 
 // Middlewares
-const allowedOrigins = ["http://localhost:3000", "http://127.0.0.1:3000"];
+const allowedOrigins = ["http://localhost:3000", "http://127.0.0.1:3000", "https://labelzai.in", "https://www.labelzai.in"];
 if (process.env.FRONTEND_URL) {
   const customOrigins = process.env.FRONTEND_URL.split(",").map(url => url.trim());
   allowedOrigins.push(...customOrigins);
