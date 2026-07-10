@@ -33,9 +33,6 @@ export default function IndustriesPage() {
           <div className="lg:col-span-5 flex flex-col justify-center px-6 py-10 md:py-16 lg:px-12 xl:px-20 bg-gradient-to-r from-[#7ABEF4]/12 via-[#7ABEF4]/3 to-white text-navy relative z-10">
             <div className="absolute top-0 left-0 w-80 h-80 bg-accent-gold/3 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
             <div className="max-w-xl relative z-10 pb-8 lg:pb-12">
-              <span className="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-gold bg-accent-gold/10 rounded-full mb-6">
-                Market Sectors
-              </span>
               <h1 className="text-3xl sm:text-4xl lg:text-[32px] xl:text-[35px] font-normal font-poppins text-navy leading-tight mb-6 tracking-tight whitespace-nowrap">
                 Sectors We Empower
               </h1>

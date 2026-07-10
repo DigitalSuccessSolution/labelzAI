@@ -58,3 +58,5 @@ app.listen(PORT, () => {
   console.log(`Database source URI: ${MONGODB_URI}`);
 });
 // Reload database configs
+
+module.exports = app;
