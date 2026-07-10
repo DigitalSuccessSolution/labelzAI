@@ -23,17 +23,17 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const INDUSTRIES = [
-  { name: "Information Technology (IT)", href: "/industries", image: "/images/it-technology.png", description: "Software development, cloud, AI, cybersecurity, and data science talent." },
-  { name: "Healthcare & Biotechnology", href: "/industries", image: "/images/healthcare-biotech.png", description: "Certified clinicians, lab researchers, biotech experts, and health administrators." },
-  { name: "Pharma & Life Sciences", href: "/industries", image: "/images/pharma-life-sciences.png", description: "Clinical research, formulation, QA/QC, and regulatory affairs professionals." },
-  { name: "Liquor & Beverages", href: "/industries", image: "/images/liquor-beverages.png", description: "Distillery operations, supply chain, brand management, and sales talent." },
-  { name: "E-Commerce", href: "/industries", image: "/images/ecommerce-fulfillment.png", description: "Digital marketing, product management, logistics, and operations specialists." },
-  { name: "Renewable Energy & ESG", href: "/industries", image: "/images/renewable-energy.png", description: "Solar/wind engineers, sustainability consultants, and ESG compliance officers." },
-  { name: "Semiconductor & Electronics Manufacturing", href: "/industries", image: "/images/semiconductor-electronics.png", description: "VLSI design, assembly, quality testing, and hardware engineering talent." },
-  { name: "FinTech & BFSI", href: "/industries", image: "/images/fintech-bfsi.png", description: "Wealth management, banking operations, fintech development, and risk assessment." },
-  { name: "FMCG & FMCD", href: "/industries", image: "/images/fmcg-fmcd.png", description: "Brand management, trade marketing, retail distribution, and product logistics." },
-  { name: "Logistics", href: "/industries", image: "/images/logistics-warehouse.png", description: "Warehouse management, cold-chain operations, freight forwarding, and logistics." },
-  { name: "Manufacturing (Automobile and Ancillaries)", href: "/industries", image: "/images/automobile-manufacturing.png", description: "Plant operations, automobile design, quality control, and assembly engineers." },
+  { name: "Information Technology (IT)", href: "/industries", image: "/Industry-Blocks/ITIndustry.png", description: "Software development, cloud, AI, cybersecurity, and data science talent." },
+  { name: "Healthcare & Biotechnology", href: "/industries", image: "/Industry-Blocks/HealthcareBioTechnology.png", description: "Certified clinicians, lab researchers, biotech experts, and health administrators." },
+  { name: "Pharma & Life Sciences", href: "/industries", image: "/Industry-Blocks/PharmaLifeSciences.png", description: "Clinical research, formulation, QA/QC, and regulatory affairs professionals." },
+  { name: "Liquor & Beverages", href: "/industries", image: "/Industry-Blocks/LiquorBeverages.png", description: "Distillery operations, supply chain, brand management, and sales talent." },
+  { name: "E-Commerce", href: "/industries", image: "/Industry-Blocks/Ecommerce.png", description: "Digital marketing, product management, logistics, and operations specialists." },
+  { name: "Renewable Energy & ESG", href: "/industries", image: "/Industry-Blocks/RenewableEnergyESG.png", description: "Solar/wind engineers, sustainability consultants, and ESG compliance officers." },
+  { name: "Semiconductor & Electronics Manufacturing", href: "/industries", image: "/Industry-Blocks/SemiconductorElectronicsManufacturing.png", description: "VLSI design, assembly, quality testing, and hardware engineering talent." },
+  { name: "FinTech & BFSI", href: "/industries", image: "/Industry-Blocks/FinTechBFSI.png", description: "Wealth management, banking operations, fintech development, and risk assessment." },
+  { name: "FMCG & FMCD", href: "/industries", image: "/Industry-Blocks/fmcgfmcd.png", description: "Brand management, trade marketing, retail distribution, and product logistics." },
+  { name: "Logistics", href: "/industries", image: "/Industry-Blocks/LogisticsSupplyChain.png", description: "Warehouse management, cold-chain operations, freight forwarding, and logistics." },
+  { name: "Manufacturing (Automobile and Ancillaries)", href: "/industries", image: "/Industry-Blocks/AutomobileAncillaryManufacturing.png", description: "Plant operations, automobile design, quality control, and assembly engineers." },
 ];
 
 export interface ContentBlock {
