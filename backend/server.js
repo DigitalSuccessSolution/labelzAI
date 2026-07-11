@@ -51,7 +51,7 @@ app.use("/api/enquiries", enquiryRoutes);
 app.get("/health", (req, res) => {
   res.json({ status: "healthy", database: mongoose.connection.readyState === 1 ? "connected" : "disconnected" });
 });
-
+ 
 // Start Express Server
 app.listen(PORT, () => {
   console.log(`LabelzAI Server is running on port ${PORT}`);
