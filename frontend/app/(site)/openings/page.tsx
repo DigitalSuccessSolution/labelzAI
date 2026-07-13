@@ -154,6 +154,21 @@ export default function OpeningsPage() {
       return;
     }
 
+    // Email address validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(applyForm.email.trim())) {
+      setApplyError("Please enter a valid email address.");
+      return;
+    }
+
+    // Phone number validation (allows optional '+' or leading country code, 10 to 12 digits)
+    const cleanPhone = applyForm.phone.trim().replace(/[-\s()]/g, "");
+    const phoneRegex = /^\+?[0-9]{10,12}$/;
+    if (!phoneRegex.test(cleanPhone)) {
+      setApplyError("Please enter a valid 10-to-12 digit phone number.");
+      return;
+    }
+
     try {
       setApplySubmitting(true);
       const response = await fetch("/api/applications", {

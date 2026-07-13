@@ -47,6 +47,23 @@ export default function ContactPage() {
       return;
     }
 
+    // Email address validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setError("Please enter a valid corporate email address.");
+      setLoading(false);
+      return;
+    }
+
+    // Phone number validation (allows optional '+' or leading country code, 10 to 12 digits)
+    const cleanPhone = phone.trim().replace(/[-\s()]/g, "");
+    const phoneRegex = /^\+?[0-9]{10,12}$/;
+    if (!phoneRegex.test(cleanPhone)) {
+      setError("Please enter a valid 10-to-12 digit phone number.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/enquiries", {
         method: "POST",
